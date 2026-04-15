@@ -30,7 +30,7 @@ export default function DeleteAccount() {
           <strong>Your handle</strong> (e.g. <code>@alice</code>) — registered on a public blockchain (Base).
         </li>
         <li>
-          <strong>Your data</strong> (profile, posts, messages) — stored on your personal Archeum node, which you own.
+          <strong>Your data</strong> (profile, posts, messages) — stored on your personal Archeum node, which you either own outright or have a tenant share of on someone else&apos;s node.
         </li>
       </ol>
 

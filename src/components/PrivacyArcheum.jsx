@@ -69,18 +69,29 @@ export default function PrivacyArcheum() {
         no crash reporting, no ad tracking.
       </p>
       <p>
-        If you tap <em>Settings → Send Feedback</em>, the app opens your email
-        app with recent debug logs (up to ~50 KB, kept only in memory, not
-        persisted) attached, addressed to <code>contact@archeum.io</code>.
-        Nothing is sent unless you choose to send the email.
+        If you tap <em>Settings → Send Feedback</em>, the app opens the system
+        share sheet (or email app) with recent debug logs (up to ~50 KB,
+        normally kept only in memory; briefly written to a temp file for the
+        share sheet attachment, cleaned up by the OS) addressed to{' '}
+        <code>contact@archeum.io</code>. Nothing is sent unless you choose to
+        send it.
       </p>
 
       <h2>Permissions</h2>
       <ul>
         <li><strong>Internet</strong>: connect to your node and the blockchain.</li>
-        <li><strong>Bluetooth</strong>: provision a nearby Archeum node (first-time setup).</li>
-        <li><strong>Location</strong> (coarse, BLE-required): Android requires it for Bluetooth scanning. We do not read or transmit your location.</li>
+        <li><strong>Bluetooth</strong>: provision a nearby Archeum node (first-time setup). Local-only; no data is transmitted over the internet via Bluetooth.</li>
+        <li><strong>Fine Location</strong>: Android requires it to scan for Bluetooth devices during node provisioning. We do not read, store, or transmit your location.</li>
       </ul>
+
+      <h2>Local network communication</h2>
+      <p>
+        During first-time node provisioning, the app may talk to a node on your
+        local network using plaintext HTTP (e.g. <code>http://[::1]:8080</code>).
+        This traffic never leaves the local network. Once provisioned, all
+        communication with your node uses encrypted QUIC (TLS 1.3) over the
+        internet.
+      </p>
 
       <h2>Third parties</h2>
       <ul>

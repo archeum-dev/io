@@ -54,10 +54,15 @@ export default function PrivacySocial() {
 
       <h2>What other users can see</h2>
       <p>
-        Content you publish publicly (posts, profile, public likes) is
-        readable by anyone on the Archeum network. Content you share with
-        specific recipients is end-to-end encrypted (AGE) and only readable by
-        them. Messages between users are encrypted.
+        Content you publish publicly (public posts, profile name/bio, public
+        likes and follows) is readable by anyone on the Archeum network and is
+        stored unencrypted on your node.
+      </p>
+      <p>
+        Content you share with specific recipients (private posts,
+        friends-only posts, direct messages) is end-to-end encrypted (AGE) to
+        the recipients&apos; public keys. Only they can decrypt it, even if someone
+        else obtains the stored ciphertext.
       </p>
       <p>
         Archeum handles are pseudonymous — they are not tied to your real name
@@ -70,10 +75,12 @@ export default function PrivacySocial() {
         crash reporting, no ad tracking.
       </p>
       <p>
-        If you tap <em>Settings → Send Feedback</em>, the app opens your email
-        app with recent debug logs (up to ~50 KB, kept only in memory, not
-        persisted) attached, addressed to <code>contact@archeum.io</code>.
-        Nothing is sent unless you choose to send the email.
+        If you tap <em>Settings → Send Feedback</em>, the app opens the system
+        share sheet (or email app) with recent debug logs (up to ~50 KB,
+        normally kept only in memory; briefly written to a temp file for the
+        share sheet attachment, cleaned up by the OS) addressed to{' '}
+        <code>contact@archeum.io</code>. Nothing is sent unless you choose to
+        send it.
       </p>
 
       <h2>User-generated content & moderation</h2>
