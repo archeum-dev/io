@@ -16,11 +16,14 @@ export default function DeleteAccount() {
 
       <h2>How Archeum differs from typical apps</h2>
       <p>
-        Archeum is decentralized. <strong>The app publisher does not operate any servers that store your data.</strong>
-        There is no central database of user accounts for us to delete from.
+        Archeum is a decentralized personal-infrastructure layer. The Archeum
+        app is where you create your wallet, register a handle, and manage the
+        node that stores your data. <strong>The app publisher does not operate
+        any servers that store your data.</strong> There is no central database
+        of user accounts for us to delete from.
       </p>
       <p>
-        Your Archeum identity consists of three parts, each of which you fully control:
+        Your Archeum account consists of three parts, each of which you fully control:
       </p>
       <ol>
         <li>
@@ -30,60 +33,91 @@ export default function DeleteAccount() {
           <strong>Your handle</strong> (e.g. <code>@alice</code>) — registered on a public blockchain (Base).
         </li>
         <li>
-          <strong>Your data</strong> (profile, posts, messages) — stored on your personal Archeum node, which you either own outright or have a tenant share of on someone else&apos;s node.
+          <strong>Your node storage</strong> — raw data stored on your personal
+          Archeum node, which you either own outright or have a tenant share
+          of on someone else&apos;s node. Third-party Archeum apps (like Social)
+          write their data here on your behalf, each in its own isolated
+          namespace.
         </li>
       </ol>
 
       <h2>How to delete your account</h2>
       <p>
-        Because no developer-side record exists, deletion is something you perform yourself. To fully remove your Archeum account:
+        Because no developer-side record exists, deletion is something you perform yourself.
       </p>
 
-      <h3>1. Handle dormancy (automatic)</h3>
+      <h3>1. Clear data from your node</h3>
       <p>
-        Handles you register are tied to your wallet on the blockchain. If you delete your device keys and stop using the app, your handle remains registered but becomes dormant — no one can interact with you through it because the node it points to is offline.
-      </p>
-      <p>
-        For extra privacy, you can also transfer your handle to another wallet (e.g., a throwaway wallet you then discard the keys for) via the contract. Interacting with the contract directly requires a block explorer or a tool like Etherscan; a built-in &quot;release handle&quot; feature is planned for a future app update.
-      </p>
-
-      <h3>2. Delete your node data</h3>
-      <p>
-        Your node holds your profile, posts, and messages. Since you own the node, you decide what happens to its data.
+        Any Archeum apps you&apos;ve used have stored data on your node, each in
+        its own namespace. How you clear it depends on where your node runs:
       </p>
       <ul>
         <li>
-          If you run your node on a phone or computer: delete the Archeum Node application or its data directory.
+          <strong>Node on your own computer</strong>: stop the node and delete
+          its data directory (<code>~/.archeum/</code> on Linux/macOS,{' '}
+          <code>%LOCALAPPDATA%\archeum\</code> on Windows). Restarting with an
+          empty directory wipes all stored data.
         </li>
         <li>
-          If another user hosts your node (tenant model): ask them to remove you via their Archeum app (Settings → Node Sharing → Remove Tenant).
+          <strong>Node hosted by another user (tenant model)</strong>: ask them
+          to remove you via their Archeum app (Settings → Node Sharing →
+          Remove Tenant). On removal, your data is deleted from their node.
+        </li>
+        <li>
+          <strong>Per-app data</strong>: many Archeum apps also offer
+          namespace-specific deletion from within their own settings (e.g.,
+          clearing posts and messages from a social app). See that app&apos;s
+          settings for details. A unified &quot;Node Storage&quot; view in the
+          Archeum app is planned for a future update.
         </li>
       </ul>
 
+      <h3>2. Handle dormancy</h3>
+      <p>
+        Handles you register are tied to your wallet on the blockchain. If you
+        delete your device keys and stop using the app, your handle remains
+        registered but becomes dormant — no one can interact with you through
+        it because the node it points to is offline.
+      </p>
+      <p>
+        For extra privacy, you can also transfer your handle to another wallet
+        (e.g., a throwaway wallet you then discard the keys for) via the
+        contract. Interacting with the contract directly requires a block
+        explorer or a tool like Etherscan; a built-in &quot;release handle&quot;
+        feature is planned for a future app update.
+      </p>
+
       <h3>3. Remove the app from your phone</h3>
       <p>
-        Uninstall the Archeum app (and Archeum Social, if installed) from your device. This removes all locally-stored keys and cached data.
+        Uninstall the Archeum app from your device. This removes all
+        locally-stored keys, your mnemonic, and app settings.
       </p>
 
       <h2>What data is deleted vs. retained</h2>
       <ul>
         <li>
-          <strong>Deleted immediately</strong>: All on-device data (wallet keys, cached content, app settings). Uninstalling the app wipes this.
+          <strong>Deleted immediately</strong>: All on-device data (wallet
+          keys, mnemonic, app settings). Uninstalling the app wipes this.
         </li>
         <li>
-          <strong>Deleted by your action</strong>: Profile, posts, messages, and other content on your node — you control when these are removed.
+          <strong>Deleted by your action</strong>: All data stored on your
+          node across every app&apos;s namespace — you control when and how this
+          is removed.
         </li>
         <li>
-          <strong>Cannot be deleted</strong>: On-chain handle registration history. The blockchain is immutable by design — past registrations, transfers, and releases remain publicly visible. However, once you release a handle, the handle itself becomes available again and your wallet address is no longer associated with it going forward.
-        </li>
-        <li>
-          <strong>Other users&apos; cached copies</strong>: If other users have already viewed your public content, their apps may have cached it locally. You cannot force those caches to clear.
+          <strong>Cannot be deleted</strong>: On-chain handle registration
+          history. The blockchain is immutable by design — past registrations,
+          transfers, and releases remain publicly visible. However, once you
+          transfer or release a handle, your wallet address is no longer the
+          current owner going forward.
         </li>
       </ul>
 
       <h2>What the publisher retains</h2>
       <p>
-        <strong>Nothing.</strong> The app publisher operates no servers that receive or store your data. We cannot delete or retain anything on your behalf because we never had it.
+        <strong>Nothing.</strong> The app publisher operates no servers that
+        receive or store your data. We cannot delete or retain anything on your
+        behalf because we never had it.
       </p>
       <p>
         If you previously sent us a feedback email (Settings → Send Feedback),
