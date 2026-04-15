@@ -3,6 +3,8 @@ import { Route, Switch } from 'wouter'
 import Scene from './components/Scene'
 import ContentPane from './components/ContentPane'
 import AIHelp from './components/AIHelp'
+import PrivacyArcheum from './components/PrivacyArcheum'
+import PrivacySocial from './components/PrivacySocial'
 
 const MAX_SCROLL_PROGRESS = 0.82
 const BLACKOUT_START = 0.80
@@ -566,6 +568,8 @@ function App() {
   return (
     <Switch>
       <Route path="/ai-help" component={AIHelp} />
+      <Route path="/privacy/archeum" component={PrivacyArcheum} />
+      <Route path="/privacy/social" component={PrivacySocial} />
       <Route component={MainApp} />
     </Switch>
   )
