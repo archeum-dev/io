@@ -5,6 +5,7 @@ import ContentPane from './components/ContentPane'
 import AIHelp from './components/AIHelp'
 import PrivacyArcheum from './components/PrivacyArcheum'
 import PrivacySocial from './components/PrivacySocial'
+import DeleteAccount from './components/DeleteAccount'
 
 const MAX_SCROLL_PROGRESS = 0.82
 const BLACKOUT_START = 0.80
@@ -570,6 +571,7 @@ function App() {
       <Route path="/ai-help" component={AIHelp} />
       <Route path="/privacy/archeum" component={PrivacyArcheum} />
       <Route path="/privacy/social" component={PrivacySocial} />
+      <Route path="/delete-account" component={DeleteAccount} />
       <Route component={MainApp} />
     </Switch>
   )
