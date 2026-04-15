@@ -11,12 +11,12 @@ export default function PrivacySocial() {
       background: '#1a1a1a',
       minHeight: '100vh',
     }}>
-      <h1>Privacy Policy — Archeum Social</h1>
+      <h1>Privacy Policy — Social</h1>
       <p><em>Last updated: April 15, 2026</em></p>
 
       <h2>Overview</h2>
       <p>
-        Archeum Social is a decentralized social app built on the Archeum
+        Social is a decentralized social app built on the Archeum
         network. It connects to the node you own (through the Archeum app) to
         read and write your social data. Archeum the publisher does not operate
         servers that receive or store your data.
@@ -78,7 +78,7 @@ export default function PrivacySocial() {
 
       <h2>User-generated content & moderation</h2>
       <p>
-        Archeum Social does not moderate content centrally. You can block and
+        Social does not moderate content centrally. You can block and
         mute other users locally. Content you block is filtered out of your own
         feed — it is not removed from the network. For reporting illegal content,
         contact <a href="mailto:contact@archeum.io" style={{color: '#8ab4ff'}}>contact@archeum.io</a>;
@@ -102,7 +102,7 @@ export default function PrivacySocial() {
       </ul>
 
       <h2>Children</h2>
-      <p>Archeum Social is not intended for users under 18.</p>
+      <p>Social is not intended for users under 18.</p>
 
       <h2>Changes to this policy</h2>
       <p>
