@@ -572,6 +572,7 @@ function App() {
       <Route path="/privacy/archeum" component={PrivacyArcheum} />
       <Route path="/privacy/social" component={PrivacySocial} />
       <Route path="/delete-account" component={DeleteAccount} />
+      <Route path="/delete-data" component={DeleteData} />
       <Route component={MainApp} />
     </Switch>
   )

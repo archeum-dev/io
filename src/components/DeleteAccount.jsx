@@ -49,26 +49,27 @@ export default function DeleteAccount() {
       <h3>1. Clear data from your node</h3>
       <p>
         Any Archeum apps you&apos;ve used have stored data on your node, each in
-        its own namespace. How you clear it depends on where your node runs:
+        its own namespace. The fastest way to clear it all:
       </p>
       <ul>
         <li>
-          <strong>Node on your own computer</strong>: stop the node and delete
-          its data directory (<code>~/.archeum/</code> on Linux/macOS,{' '}
-          <code>%LOCALAPPDATA%\archeum\</code> on Windows). Restarting with an
-          empty directory wipes all stored data.
+          <strong>In the Archeum app</strong>: tap your identity card →
+          Storage → Apps tab. For each app, tap <strong>Clear data</strong> to
+          delete its stored content, or <strong>Revoke</strong> to remove the
+          app&apos;s access to your identity (or both, to fully wipe its
+          footprint).
+        </li>
+        <li>
+          <strong>Node on your own computer</strong>: you can also stop the
+          node and delete its data directory directly (<code>~/.archeum/</code>{' '}
+          on Linux/macOS, <code>%LOCALAPPDATA%\archeum\</code> on Windows).
+          Restarting with an empty directory wipes all stored data in one
+          action.
         </li>
         <li>
           <strong>Node hosted by another user (tenant model)</strong>: ask them
           to remove you via their Archeum app (Settings → Node Sharing →
           Remove Tenant). On removal, your data is deleted from their node.
-        </li>
-        <li>
-          <strong>Per-app data</strong>: many Archeum apps also offer
-          namespace-specific deletion from within their own settings (e.g.,
-          clearing posts and messages from a social app). See that app&apos;s
-          settings for details. A unified &quot;Node Storage&quot; view in the
-          Archeum app is planned for a future update.
         </li>
       </ul>
 
