@@ -6,6 +6,7 @@ import AIHelp from './components/AIHelp'
 import PrivacyArcheum from './components/PrivacyArcheum'
 import PrivacySocial from './components/PrivacySocial'
 import DeleteAccount from './components/DeleteAccount'
+import DeleteData from './components/DeleteData'
 
 const MAX_SCROLL_PROGRESS = 0.82
 const BLACKOUT_START = 0.80
