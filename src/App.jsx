@@ -307,7 +307,7 @@ function MainApp() {
               e.currentTarget.style.opacity = '1'
             }}
           >
-            <img src="/logo.png" alt="Archeum Logo" style={{ width: isMobile ? '24px' : '28px', height: 'auto' }} />
+            <img src="/brand/apps/archeum/logo.png" alt="Archeum Logo" style={{ width: isMobile ? '24px' : '28px', height: 'auto' }} />
             <span style={{
               fontSize: isMobile ? '1.1rem' : '1.35rem',
               fontWeight: 500,
@@ -459,7 +459,7 @@ function MainApp() {
           maxWidth: isMobile ? '100%' : 'none'
         }}>
           <img
-            src="/logo.png"
+            src="/brand/apps/archeum/logo.png"
             alt="Archeum"
             style={{ width: isMobile ? '100px' : '160px', marginBottom: isMobile ? '1.5rem' : '2rem', opacity: 0.9 }}
           />

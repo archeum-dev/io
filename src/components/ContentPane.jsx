@@ -403,7 +403,7 @@ export default function ContentPane({ animationPhase, isMobile, onScrollProgress
                                     boxSizing: 'border-box'
                                 }}>
                                     <img
-                                        src="/logo.png"
+                                        src="/brand/apps/archeum/logo.png"
                                         alt="Archeum"
                                         style={{
                                             width: isMobile ? '40px' : '55px',
