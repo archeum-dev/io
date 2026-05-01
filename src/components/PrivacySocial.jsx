@@ -105,7 +105,7 @@ export default function PrivacySocial() {
       <ul>
         <li><strong>Archeum app</strong> — handles all wallet signing and encryption on your behalf (same device only; no network).</li>
         <li><strong>Base (Coinbase)</strong> — public blockchain used to resolve handles.</li>
-        <li><strong>Google Play Services</strong> — for app distribution and (in future releases) Play Integrity device attestation.</li>
+        <li><strong>Google Play Services</strong> — for app distribution.</li>
       </ul>
 
       <h2>Children</h2>

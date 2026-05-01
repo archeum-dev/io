@@ -97,7 +97,7 @@ export default function PrivacyArcheum() {
       <ul>
         <li><strong>Base (Coinbase)</strong> — public blockchain used for handle registration.</li>
         <li><strong>Pimlico</strong> — optional bundler/paymaster for sponsored transactions.</li>
-        <li><strong>Google Play Services</strong> — for app distribution and (in future releases) Play Integrity device attestation.</li>
+        <li><strong>Google Play Services</strong> — for app distribution.</li>
       </ul>
 
       <h2>Children</h2>
