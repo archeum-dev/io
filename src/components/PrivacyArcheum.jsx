@@ -100,6 +100,21 @@ export default function PrivacyArcheum() {
         <li><strong>Google Play Services</strong> — for app distribution.</li>
       </ul>
 
+      <h2>Data deletion</h2>
+      <p>
+        You can delete your account at any time: Settings → Delete Account.
+        This wipes all data stored on your node (across every app namespace)
+        and erases all local data (wallet keys, mnemonic, secure storage).
+        See{' '}
+        <a href="/delete-account" style={{color: '#8ab4ff'}}>archeum.io/delete-account</a>{' '}
+        for the full process.
+      </p>
+      <p>
+        On-chain handle registrations are immutable — the blockchain retains a
+        public record of past registrations. After deletion, your handle points
+        at an emptied, offline node.
+      </p>
+
       <h2>Children</h2>
       <p>Archeum is not intended for users under 18.</p>
 

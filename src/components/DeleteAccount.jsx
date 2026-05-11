@@ -43,74 +43,74 @@ export default function DeleteAccount() {
 
       <h2>How to delete your account</h2>
       <p>
-        Because no developer-side record exists, deletion is something you perform yourself.
+        Because no developer-side record exists, deletion is something you
+        perform yourself — directly in the app.
       </p>
 
-      <h3>1. Clear data from your node</h3>
+      <h3>1. Use the in-app Delete Account flow (recommended)</h3>
       <p>
-        Any Archeum apps you&apos;ve used have stored data on your node, each in
-        its own namespace. The fastest way to clear it all:
+        Open the Archeum app → Settings → <strong>Delete Account</strong>.
+        You&apos;ll be asked to type &quot;delete&quot; as confirmation. Once
+        confirmed, the app will:
+      </p>
+      <ol>
+        <li>Wipe all data stored on your node across every app&apos;s namespace.</li>
+        <li>Clear all local secure storage (wallet keys, mnemonic, app settings).</li>
+        <li>Sign you out.</li>
+      </ol>
+      <p>
+        After deletion completes, you&apos;re returned to the welcome screen.
+        Uninstall the app to remove any remaining cache files.
+      </p>
+
+      <h3>2. Alternative: manual cleanup</h3>
+      <p>
+        If you prefer to selectively remove data before deleting your account:
       </p>
       <ul>
         <li>
-          <strong>In the Archeum app</strong>: tap your identity card →
+          <strong>Per-app cleanup</strong>: tap your identity card →
           Storage → Apps tab. For each app, tap <strong>Clear data</strong> to
-          delete its stored content, or <strong>Revoke</strong> to remove the
-          app&apos;s access to your identity (or both, to fully wipe its
-          footprint).
+          delete its stored content.
         </li>
         <li>
-          <strong>Node on your own computer</strong>: you can also stop the
-          node and delete its data directory directly (<code>~/.archeum/</code>{' '}
-          on Linux/macOS, <code>%LOCALAPPDATA%\archeum\</code> on Windows).
-          Restarting with an empty directory wipes all stored data in one
-          action.
+          <strong>Node on your own computer</strong>: stop the node and delete
+          its data directory (<code>~/.archeum/</code> on Linux/macOS,{' '}
+          <code>%LOCALAPPDATA%\archeum\</code> on Windows).
         </li>
         <li>
-          <strong>Node hosted by another user (tenant model)</strong>: ask them
-          to remove you via their Archeum app (Settings → Node Sharing →
-          Remove Tenant). On removal, your data is deleted from their node.
+          <strong>Tenant on someone else&apos;s node</strong>: ask them to
+          remove you (Settings → Node Sharing → Remove Tenant), or leave the
+          node yourself (Settings → Leave Node). On removal, your data is
+          deleted from their node.
         </li>
       </ul>
 
-      <h3>2. Handle dormancy</h3>
+      <h3>3. Handle dormancy</h3>
       <p>
-        Handles you register are tied to your wallet on the blockchain. If you
-        delete your device keys and stop using the app, your handle remains
-        registered but becomes dormant — no one can interact with you through
-        it because the node it points to is offline.
-      </p>
-      <p>
-        For extra privacy, you can also transfer your handle to another wallet
-        (e.g., a throwaway wallet you then discard the keys for) via the
-        contract. Interacting with the contract directly requires a block
-        explorer or a tool like Etherscan; a built-in &quot;release handle&quot;
-        feature is planned for a future app update.
-      </p>
-
-      <h3>3. Remove the app from your phone</h3>
-      <p>
-        Uninstall the Archeum app from your device. This removes all
-        locally-stored keys, your mnemonic, and app settings.
+        Your handle remains registered on the blockchain after account
+        deletion — the blockchain is immutable. However, because your node is
+        offline and your data is wiped, the handle effectively becomes dormant.
+        No one can interact with you through it.
       </p>
 
       <h2>What data is deleted vs. retained</h2>
       <ul>
         <li>
-          <strong>Deleted immediately</strong>: All on-device data (wallet
-          keys, mnemonic, app settings). Uninstalling the app wipes this.
+          <strong>Deleted by the in-app flow</strong>: All data stored on your
+          node (every namespace) + all on-device data (wallet keys, mnemonic,
+          app settings, secure storage). This happens in a single operation
+          when you confirm deletion.
         </li>
         <li>
-          <strong>Deleted by your action</strong>: All data stored on your
-          node across every app&apos;s namespace — you control when and how this
-          is removed.
+          <strong>Deleted on uninstall</strong>: Any remaining app cache files
+          not covered by the deletion flow.
         </li>
         <li>
           <strong>Cannot be deleted</strong>: On-chain handle registration
           history. The blockchain is immutable by design — past registrations,
-          transfers, and releases remain publicly visible. However, once you
-          transfer or release a handle, your wallet address is no longer the
-          current owner going forward.
+          transfers, and challenges remain publicly visible. However, the
+          handle points at an emptied, offline node after deletion.
         </li>
       </ul>
 
