@@ -110,7 +110,7 @@ async function buildCard() {
   // Subhead - the paired subtext, dim.
   ctx.font = `31px "${REGULAR}"`
   ctx.fillStyle = '#a1a1a6'
-  ctx.fillText('Grab your piece of the internet.', cx, 452)
+  ctx.fillText('Claim your part of the internet.', cx, 452)
 
   // Domain tag at the foot, quiet gold.
   ctx.font = `25px "${SEMIBOLD}"`
