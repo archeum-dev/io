@@ -9,6 +9,7 @@
   <title>Archeum</title>
   <meta name="description" content="Grab a handle like @alice and it's yours. A new internet that runs on everyone's phones. No servers, no company, no fees." />
   <meta name="theme-color" content="#0d0d0d" />
+  <meta name="color-scheme" content="dark" />
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
@@ -84,7 +85,7 @@
       <img class="hero-bg" src="/brand/apps/archeum/logo.png" alt="" aria-hidden="true" decoding="async" />
       <div class="wrap">
         <p class="handle reveal" data-delay="1" aria-hidden="true">
-          <span class="at gold">@</span><span class="roll"><span class="name" id="handleName">alice</span></span>
+          <span class="at gold">@</span><span class="roll"><span class="name" id="handleName">archeum</span></span>
         </p>
         <h1 class="h2 reveal" data-delay="2">A name that's yours.</h1>
         <p class="sub reveal" data-delay="2">Grab your piece of the internet.</p>
@@ -112,9 +113,18 @@
       <div class="wrap reveal">
         <div class="b-copy">
           <h2 class="b-head">Now it lives in your <span class="gold">pocket</span>.</h2>
-          <p class="b-sub">Your identity lives and changes with you. Apps run fully on-device, combining your data in previously impossible ways.</p>
+          <p class="b-sub">With Archeum, your identity stays with you. Apps run fully on-device, combining your data in previously impossible ways.</p>
         </div>
         <div class="b-aside" aria-hidden="true"><div class="flow-wrap" id="flowPocket"></div></div>
+      </div>
+    </section>
+
+    <!-- Beat 2.5: the bridge - free for everyone (open source, no company, no costs) -->
+    <section class="beat beat--center tint" id="free">
+      <div class="wrap reveal">
+        <p class="dev-label">Open Source Software</p>
+        <h2 class="b-head">Free for <span class="gold">everyone</span>.</h2>
+        <p class="b-sub b-sub--center">Developers have no server bills forcing ads/subscriptions. Users reap the benefits.</p>
       </div>
     </section>
 
@@ -122,7 +132,7 @@
     <section class="beat beat--fullbleed tint" id="resilient">
       <canvas class="life-bg" id="lifeBg" aria-hidden="true"></canvas>
       <div class="wrap reveal">
-        <p class="dev-label">Oh right, also:</p>
+        <p class="dev-label">In other words:</p>
         <h2 class="b-head">Apps and games <span class="gold">never die.</span></h2>
         <p class="b-sub b-sub--center">Since apps and games are fully on-device, they survive until the last person uninstalls.</p>
       </div>
@@ -131,24 +141,21 @@
     <!-- Beat 4: the builder's mirror - zero infrastructure -->
     <section class="beat beat--split beat--mirror" id="developers">
       <div class="wrap reveal">
-        <div class="b-aside">
+        <p class="dev-label">For developers:</p>
+        <h2 class="b-head">Build once. <span class="gold">Run forever.</span></h2>
+        <p class="b-sub">No backend, no database, nothing to keep alive at 3am. Having a million users costs the same as having zero.</p>
+        <div class="dev-band">
+          <div class="aside-cost">
+            <span class="b-accent gold">$0</span>
+            <span class="b-cap">to run, at any size</span>
+          </div>
+          <div class="aside-divider" aria-hidden="true"></div>
+          <div class="b-aside">
 <pre class="code-card" aria-hidden="true"><code><span class="tok-c">// Send a message to Bob</span>
 <span class="tok-k">final</span> client = <span class="tok-k">await</span> <span class="tok-f">ArcheumClient.signIn</span>(<span class="tok-s">'Luffy'</span>);
 <span class="tok-k">final</span> bob = <span class="tok-k">await</span> client.<span class="tok-f">find</span>(<span class="tok-s">'bob'</span>);
 <span class="tok-k">await</span> bob.<span class="tok-f">inbox</span>(<span class="tok-s">'messages'</span>).<span class="tok-f">send</span>(<span class="tok-s">'Yo'</span>);</code></pre>
-        </div>
-        <div class="b-copy">
-          <p class="dev-label">For developers:</p>
-          <h2 class="b-head">Build once,<br><span class="gold">run forever.</span></h2>
-          <p class="b-sub">No backend, no database, nothing to keep alive at 3am. Having a million users costs the same as having zero.</p>
-          <div class="actions">
-            <a class="tlink" href="https://archeum.dev" target="_blank" rel="noopener">Read the docs <span class="chev">›</span></a>
           </div>
-        </div>
-        <div class="aside-divider" aria-hidden="true"></div>
-        <div class="aside-cost">
-          <span class="b-accent gold">$0</span>
-          <span class="b-cap">to run, at any size</span>
         </div>
       </div>
     </section>

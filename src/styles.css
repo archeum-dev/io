@@ -6,6 +6,9 @@
    ============================================================ */
 
 :root {
+  /* Tell the browser the page is already dark, so forced/auto dark modes
+     (notably Samsung Internet) don't re-darken it and muddy the gold. */
+  color-scheme: dark;
   /* Canvas - neutral grays from the app's surface ladder (no blue) */
   --bg:        #0d0d0d;   /* app ArcheumColors.background - halfway to black */
   --bg-1:      #1a1a1a;   /* tint - app surface (the insight-tile color) */
@@ -299,24 +302,39 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.025em; line-height: 1.06; marg
 .beat--split .b-head { font-size: clamp(2.2rem, 5.1vw, 4.2rem); }
 .beat--split .b-aside { display: grid; place-items: center; gap: 0.7rem; }
 .beat--split .actions { margin-top: 1.6rem; }
-/* Dev beat: code + divider + $0 stacked on the left, copy on the right
-   (desktop). On mobile this reflows to code -> copy -> $0 (responsive block). */
+/* Dev beat (desktop): a centered vertical flow - header, large title, then a
+   [ $0 | vertical divider | code ] band, then description, then docs. b-copy is
+   display:contents so every part places independently (mobile reorders them). */
 .beat--mirror .wrap {
-  grid-template-areas:
-    "code copy"
-    "div  copy"
-    "cost copy";
-  column-gap: clamp(2rem, 5vw, 5rem);
-  row-gap: clamp(1rem, 2.6vh, 1.7rem);
+  grid-template-columns: 1fr;
+  max-width: 940px;
+  margin-inline: auto;
+  justify-items: center;
+  text-align: center;
+  row-gap: clamp(1.4rem, 3.2vh, 2.4rem);
 }
-.beat--mirror .b-copy { grid-area: copy; }
-.beat--mirror .aside-divider { grid-area: div; justify-self: center; }
-.beat--mirror .aside-cost { grid-area: cost; }
+.beat--mirror .b-head { white-space: nowrap; font-size: clamp(2.4rem, 5.2vw, 4rem); }
+/* the centered [ $0 | vertical divider | code ] band */
+.beat--mirror .dev-band {
+  display: flex; align-items: center; justify-content: center;
+  gap: clamp(1.5rem, 3vw, 3rem);
+}
+.beat--mirror .aside-divider {
+  width: 1px; max-width: none; height: clamp(96px, 20vh, 180px);
+  background: linear-gradient(180deg, transparent, var(--line), transparent);
+}
+.beat--mirror .b-sub { margin-inline: auto; }
+.beat--mirror .brk { display: none; }   /* title is one line on desktop */
 
 /* fullbleed statement: one huge line, deep margins */
 .beat--fullbleed { text-align: center; position: relative; overflow: hidden; }
 .beat--fullbleed .b-head { font-size: clamp(2.6rem, 8.8vw, 7rem); max-width: 16ch; margin-inline: auto; letter-spacing: -0.04em; }
 .beat--fullbleed .b-sub { max-width: 56ch; }
+
+/* centered statement (no diagram): a calm bridge between the split beats */
+.beat--center .wrap { max-width: 820px; margin-inline: auto; text-align: center; }
+.beat--center .b-head { font-size: clamp(2.3rem, 5.8vw, 4.8rem); }
+.beat--center .b-sub { max-width: 48ch; margin-inline: auto; }
 .beat--fullbleed .wrap { position: relative; z-index: 2; }
 /* Game of Life living background (life.js) + a vignette to keep the copy legible. */
 .life-bg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
@@ -396,24 +414,42 @@ svg.flow { display: block; width: 100%; height: auto; }
 .aside-divider { width: 80%; max-width: 300px; height: 1px; background: linear-gradient(90deg, transparent, var(--line), transparent); }
 .aside-cost { display: grid; place-items: center; gap: 0.4rem; }
 .b-accent { font-size: clamp(3.8rem, 9vw, 7rem); font-weight: 600; letter-spacing: -0.035em; line-height: 1; }
-.beat--mirror .b-aside { grid-area: code; container-type: inline-size; }
+.beat--mirror .b-aside { container-type: inline-size; width: min(440px, 42vw); }
 
 @media (max-width: 820px) {
   .beat--split .wrap { grid-template-columns: 1fr; }
   /* On mobile the visual leads and the copy follows (reads better stacked). */
   .beat--split .b-aside { order: -1; }
-  /* Dev beat reflows top-to-bottom: label -> $0 -> heading -> sub -> divider ->
-     code -> docs. b-copy becomes display:contents so its parts split across the
-     single column; row-gap handles spacing (child margins zeroed). */
-  .beat--mirror .b-copy { display: contents; }
+  /* mobile reflow: header -> title -> $0 -> description -> docs -> divider -> code.
+     dev-band goes display:contents so its three parts split across the column. */
+  .beat--mirror .dev-band { display: contents; }
   .beat--mirror .wrap {
-    grid-template-areas: "label" "cost" "head" "sub" "div" "code" "docs";
+    grid-template-columns: 1fr;
+    grid-template-areas: "label" "title" "desc" "cost" "rule" "code";
+    max-width: none;
+    text-align: center;
     row-gap: clamp(0.9rem, 2.4vh, 1.5rem);
   }
-  .beat--mirror .dev-label { grid-area: label; margin: 0; }
-  .beat--mirror .b-head { grid-area: head; }
-  .beat--mirror .b-sub { grid-area: sub; margin: 0; }
-  .beat--mirror .actions { grid-area: docs; margin: 0; }
+  .beat--mirror .dev-label { grid-area: label; }
+  .beat--mirror .b-head { grid-area: title; }
+  .beat--mirror .aside-cost { grid-area: cost; }
+  .beat--mirror .b-sub { grid-area: desc; }
+  .beat--mirror .dev-label { margin: 0; }
+  .beat--mirror .b-sub { margin: 0 auto; }
+  .beat--mirror .actions { margin: 0; }
+  .beat--mirror .dev-label,
+  .beat--mirror .b-head,
+  .beat--mirror .b-sub,
+  .beat--mirror .actions { justify-self: center; }
+  /* big two-line title (the <br class="brk"> forces the break) */
+  .beat--mirror .b-head { font-size: clamp(2.3rem, 5.8vw, 4.8rem); }
+  .beat--mirror .brk { display: inline; }
+  /* divider back to a thin horizontal rule; code spans the column */
+  .beat--mirror .aside-divider {
+    grid-area: rule; width: 80%; max-width: 300px; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--line), transparent);
+  }
+  .beat--mirror .b-aside { grid-area: code; width: auto; justify-self: stretch; }
 }
 
 
