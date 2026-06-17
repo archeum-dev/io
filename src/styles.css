@@ -402,8 +402,18 @@ svg.flow { display: block; width: 100%; height: auto; }
   .beat--split .wrap { grid-template-columns: 1fr; }
   /* On mobile the visual leads and the copy follows (reads better stacked). */
   .beat--split .b-aside { order: -1; }
-  /* Dev beat reflows: $0 -> copy -> divider -> code (divider sits above code). */
-  .beat--mirror .wrap { grid-template-areas: "cost" "copy" "div" "code"; row-gap: clamp(1.1rem, 2.6vh, 1.6rem); }
+  /* Dev beat reflows top-to-bottom: label -> $0 -> heading -> sub -> divider ->
+     code -> docs. b-copy becomes display:contents so its parts split across the
+     single column; row-gap handles spacing (child margins zeroed). */
+  .beat--mirror .b-copy { display: contents; }
+  .beat--mirror .wrap {
+    grid-template-areas: "label" "cost" "head" "sub" "div" "code" "docs";
+    row-gap: clamp(0.9rem, 2.4vh, 1.5rem);
+  }
+  .beat--mirror .dev-label { grid-area: label; margin: 0; }
+  .beat--mirror .b-head { grid-area: head; }
+  .beat--mirror .b-sub { grid-area: sub; margin: 0; }
+  .beat--mirror .actions { grid-area: docs; margin: 0; }
 }
 
 
@@ -471,7 +481,7 @@ html.js .reveal.in { opacity: 1; transform: none; will-change: auto; }
   /* Tighter vertical breathing on mobile so each beat fits one screen (keeps the
      mandatory snap from trapping a too-tall section on short phones). */
   .beat { padding-block: clamp(2.5rem, 6vh, 4.5rem); }
-  .hero-bg { transform: translate(-58%, -50%); opacity: 0.35; }   /* big mark popping out of the left edge, less than half visible */
+  .hero-bg { transform: translate(-64%, -50%); opacity: 0.35; }   /* big mark popping out of the left edge, ~a third visible */
   /* Native page-at-a-time on touch: halt at every section even on a fast fling,
      and stay in step with the URL bar. Replaces the JS touch pager that fought
      native momentum (the "scrolls past everything" jank). */
