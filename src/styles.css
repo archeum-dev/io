@@ -414,7 +414,7 @@ svg.flow { display: block; width: 100%; height: auto; }
 .aside-divider { width: 80%; max-width: 300px; height: 1px; background: linear-gradient(90deg, transparent, var(--line), transparent); }
 .aside-cost { display: grid; place-items: center; gap: 0.4rem; }
 .b-accent { font-size: clamp(3.8rem, 9vw, 7rem); font-weight: 600; letter-spacing: -0.035em; line-height: 1; }
-.beat--mirror .b-aside { container-type: inline-size; width: min(440px, 42vw); min-width: 0; }
+.beat--mirror .b-aside { container-type: inline-size; width: min(440px, 42vw); }
 
 @media (max-width: 820px) {
   .beat--split .wrap { grid-template-columns: 1fr; }
@@ -449,10 +449,7 @@ svg.flow { display: block; width: 100%; height: auto; }
     grid-area: rule; width: 80%; max-width: 300px; height: 1px;
     background: linear-gradient(90deg, transparent, var(--line), transparent);
   }
-  .beat--mirror .b-aside { grid-area: code; width: auto; justify-self: stretch; min-width: 0; }
-  /* size the code font to the viewport so the longest line fits the screen with
-     no horizontal scroll (vw, so it works regardless of container-query support) */
-  .beat--mirror .code-card { font-size: clamp(0.5rem, 2.6vw, 0.95rem); }
+  .beat--mirror .b-aside { grid-area: code; width: auto; justify-self: stretch; }
 }
 
 
