@@ -299,7 +299,19 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.025em; line-height: 1.06; marg
 .beat--split .b-head { font-size: clamp(2.2rem, 5.1vw, 4.2rem); }
 .beat--split .b-aside { display: grid; place-items: center; gap: 0.7rem; }
 .beat--split .actions { margin-top: 1.6rem; }
-.beat--mirror .b-copy { order: 2; }   /* accent left, copy right */
+/* Dev beat: code + divider + $0 stacked on the left, copy on the right
+   (desktop). On mobile this reflows to code -> copy -> $0 (responsive block). */
+.beat--mirror .wrap {
+  grid-template-areas:
+    "code copy"
+    "div  copy"
+    "cost copy";
+  column-gap: clamp(2rem, 5vw, 5rem);
+  row-gap: clamp(1rem, 2.6vh, 1.7rem);
+}
+.beat--mirror .b-copy { grid-area: copy; }
+.beat--mirror .aside-divider { grid-area: div; justify-self: center; }
+.beat--mirror .aside-cost { grid-area: cost; }
 
 /* fullbleed statement: one huge line, deep margins */
 .beat--fullbleed { text-align: center; position: relative; overflow: hidden; }
@@ -326,6 +338,7 @@ svg.flow { display: block; width: 100%; height: auto; }
 .flow-screen { fill: #000; }
 .gold-phone .flow-phone-body { stroke: var(--gold); }
 .flow-seal { filter: drop-shadow(0 0 9px rgba(216,169,65,0.35)); }
+.flow-face { fill: rgba(255,255,255,0.62); font-family: system-ui, -apple-system, sans-serif; font-weight: 700; }
 
 /* Showcase (beat 5): the CTA beside the real app - two phones stacked, left.png
    in front, right.png peeking out from behind. */
@@ -356,7 +369,7 @@ svg.flow { display: block; width: 100%; height: auto; }
   .beat--showcase .b-copy { text-align: center; }
   .beat--showcase .b-sub { margin-inline: auto; }
   .beat--showcase .actions { justify-content: center; }
-  .phone-stack { order: -1; margin: 0 auto 2.5rem; width: clamp(116px, 40vw, 168px); }   /* phones lead, shrunk, on mobile */
+  .phone-stack { order: -1; margin: 0 auto 1.6rem; width: clamp(104px, 33vw, 150px); }   /* phones lead, shrunk, on mobile */
 }
 
 /* the enormous $0 accent for the developer beat */
@@ -383,13 +396,14 @@ svg.flow { display: block; width: 100%; height: auto; }
 .aside-divider { width: 80%; max-width: 300px; height: 1px; background: linear-gradient(90deg, transparent, var(--line), transparent); }
 .aside-cost { display: grid; place-items: center; gap: 0.4rem; }
 .b-accent { font-size: clamp(3.8rem, 9vw, 7rem); font-weight: 600; letter-spacing: -0.035em; line-height: 1; }
-.beat--mirror .b-aside { gap: clamp(1.2rem, 3vh, 2rem); container-type: inline-size; }
+.beat--mirror .b-aside { grid-area: code; container-type: inline-size; }
 
 @media (max-width: 820px) {
   .beat--split .wrap { grid-template-columns: 1fr; }
   /* On mobile the visual leads and the copy follows (reads better stacked). */
   .beat--split .b-aside { order: -1; }
-  .beat--mirror .b-copy { order: 0; }
+  /* Dev beat reflows: code -> copy -> $0 (the divider sits just above the $0). */
+  .beat--mirror .wrap { grid-template-areas: "code" "copy" "div" "cost"; row-gap: clamp(1.1rem, 2.6vh, 1.6rem); }
 }
 
 
@@ -454,7 +468,15 @@ html.js .reveal.in { opacity: 1; transform: none; will-change: auto; }
    ============================================================ */
 @media (max-width: 820px) {
   body { font-size: 16px; }
-  .hero-bg { left: 50%; transform: translate(-50%, -50%); opacity: 0.08; }   /* centred + very faint on mobile, sitting quietly behind the text */
+  /* Tighter vertical breathing on mobile so each beat fits one screen (keeps the
+     mandatory snap from trapping a too-tall section on short phones). */
+  .beat { padding-block: clamp(2.5rem, 6vh, 4.5rem); }
+  .hero-bg { display: none; }   /* drop the brand mark entirely on mobile */
+  /* Native page-at-a-time on touch: halt at every section even on a fast fling,
+     and stay in step with the URL bar. Replaces the JS touch pager that fought
+     native momentum (the "scrolls past everything" jank). */
+  html { scroll-snap-type: y mandatory; }
+  .hero, .beat, .site-footer { scroll-snap-align: start; scroll-snap-stop: always; }
   .nav-links {
     position: fixed; inset: 52px 0 auto 0;
     flex-direction: column; align-items: stretch; gap: 0;

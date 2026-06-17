@@ -186,17 +186,15 @@ if (!reduceMotion) {
       else if (e.key === 'End') { e.preventDefault(); goTo(pages.length - 1); }
     });
 
-    let touchY = 0;
-    window.addEventListener('touchstart', (e) => { touchY = e.touches[0].clientY; }, { passive: true });
-    window.addEventListener('touchend', (e) => {
-      const dy = touchY - e.changedTouches[0].clientY;
-      if (Math.abs(dy) > 45) step(dy > 0 ? 1 : -1);
-    }, { passive: true });
+    // Touch is handled natively by CSS scroll-snap on mobile (see styles.css):
+    // mandatory snap + scroll-snap-stop:always halts at every section, even on a
+    // fast fling, and stays in step with the URL bar. A JS touch pager fighting
+    // native momentum was the source of the "scrolls past everything" jank.
   }
 }
 
 /* ---- Flow diagrams: app servers stream into your phone (renting), then your
        phone streams out to your peers (pocket) ---- */
-initFlow(document.getElementById('flowRent'), { peers: 5, peerType: 'server', dir: 'in', layout: 'topRow', lineColor: 'rgba(255,255,255,0.18)', burstColor: '#ffffff' });
+initFlow(document.getElementById('flowRent'), { peers: 5, peerType: 'server', dir: 'in', layout: 'topRow', lineColor: 'rgba(255,255,255,0.18)', burstColor: '#ffffff', centerFace: ':(' });
 initLife(document.getElementById('lifeBg'));
 initFlow(document.getElementById('flowPocket'), { peers: 6, peerType: 'phone', dir: 'out', centerGold: true, ring: true, lineColor: 'rgba(212,175,55,0.55)', ringLineColor: 'rgba(212,175,55,0.16)', burstColor: '#ffecc0' });

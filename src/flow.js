@@ -27,7 +27,7 @@ function serverShape(x, y) {
   return g
 }
 
-function phoneShape(x, y, w, h, gold) {
+function phoneShape(x, y, w, h, gold, face) {
   const g = el('g', { class: 'flow-phone' + (gold ? ' gold-phone' : ''), transform: `translate(${(x - w / 2).toFixed(1)} ${(y - h / 2).toFixed(1)})` })
   g.appendChild(el('rect', { x: 0, y: 0, width: w, height: h, rx: Math.max(4, w * 0.17), class: 'flow-phone-body' }))
   const pad = Math.max(2, w * 0.045), foreh = w > 44 ? 2 : 1
@@ -35,6 +35,12 @@ function phoneShape(x, y, w, h, gold) {
   if (gold) {
     const s = w * 0.5
     g.appendChild(el('image', { href: '/brand/apps/archeum/logo.png', x: (w - s) / 2, y: (h - s) / 2, width: s, height: s, class: 'flow-seal' }))
+  }
+  if (face) {
+    const t = el('text', { x: (w / 2).toFixed(1), y: (h / 2).toFixed(1), 'text-anchor': 'middle', 'dominant-baseline': 'central', class: 'flow-face' })
+    t.style.fontSize = (w * 0.42).toFixed(0) + 'px'
+    t.textContent = face
+    g.appendChild(t)
   }
   return g
 }
@@ -44,7 +50,7 @@ export function initFlow(container, opts) {
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
   const W = 480, H = 480, cx = W / 2, cy = H / 2
   const {
-    peers = 5, peerType = 'server', dir = 'in', ring = false, centerGold = false, layout = 'ring',
+    peers = 5, peerType = 'server', dir = 'in', ring = false, centerGold = false, layout = 'ring', centerFace = null,
     lineColor = 'rgba(255,255,255,0.16)', ringLineColor, burstColor = '#ffffff',
   } = opts
 
@@ -80,7 +86,7 @@ export function initFlow(container, opts) {
     gLines.appendChild(l)
   })
   pos.forEach((p) => gPeers.appendChild(peerType === 'server' ? serverShape(p.x, p.y) : phoneShape(p.x, p.y, 30, 56, false)))
-  gCenter.appendChild(phoneShape(center.x, center.y, 86, 168, centerGold))
+  gCenter.appendChild(phoneShape(center.x, center.y, 86, 168, centerGold, centerFace))
 
   container.appendChild(svg)
   if (reduce) return
