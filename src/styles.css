@@ -203,8 +203,8 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.025em; line-height: 1.06; marg
    Hero - the handle moment
    ============================================================ */
 .hero {
-  min-height: 100vh;           /* fallback for engines without svh */
-  min-height: 100svh;          /* never taller than the first-paint visible area, so the scroll cue isn't clipped under the mobile toolbar */
+  min-height: 100vh;           /* fallback for engines without dvh */
+  min-height: 100dvh;          /* track the live viewport, so the section always fills it as the mobile URL bar shows/hides (no peeking of the next section) */
   display: grid;
   place-items: center;
   text-align: center;
@@ -288,7 +288,7 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.025em; line-height: 1.06; marg
    type, a single gold word, varied layouts, lots of black.
    ============================================================ */
 /* Each beat is a full page that snaps into place, so the heroes land one at a time. */
-.beat { min-height: 100svh; display: grid; place-items: center; padding-block: clamp(4rem, 9vh, 7rem); }
+.beat { min-height: 100vh; min-height: 100dvh; display: grid; place-items: center; padding-block: clamp(4rem, 9vh, 7rem); }
 .b-head { font-weight: 600; letter-spacing: -0.03em; line-height: 1.06; margin: 0; font-size: clamp(2.1rem, 5.4vw, 4rem); }
 .b-sub { font-size: clamp(1.1rem, 2vw, 1.45rem); line-height: 1.45; color: var(--dim); letter-spacing: -0.012em; margin: 1.3rem 0 0; max-width: 34ch; }
 .b-sub--center { margin-inline: auto; }
@@ -356,7 +356,7 @@ svg.flow { display: block; width: 100%; height: auto; }
   .beat--showcase .b-copy { text-align: center; }
   .beat--showcase .b-sub { margin-inline: auto; }
   .beat--showcase .actions { justify-content: center; }
-  .phone-stack { margin: 2.5rem auto 0; width: clamp(150px, 52vw, 196px); }
+  .phone-stack { order: -1; margin: 0 auto 2.5rem; width: clamp(116px, 40vw, 168px); }   /* phones lead, shrunk, on mobile */
 }
 
 /* the enormous $0 accent for the developer beat */
@@ -387,8 +387,9 @@ svg.flow { display: block; width: 100%; height: auto; }
 
 @media (max-width: 820px) {
   .beat--split .wrap { grid-template-columns: 1fr; }
+  /* On mobile the visual leads and the copy follows (reads better stacked). */
+  .beat--split .b-aside { order: -1; }
   .beat--mirror .b-copy { order: 0; }
-  .beat--split .b-aside { order: 2; margin-top: 0.5rem; }
 }
 
 
@@ -453,7 +454,7 @@ html.js .reveal.in { opacity: 1; transform: none; will-change: auto; }
    ============================================================ */
 @media (max-width: 820px) {
   body { font-size: 16px; }
-  .hero-bg { opacity: 0.3; }   /* dimmer on mobile, where it sits behind the centred text */
+  .hero-bg { left: 50%; transform: translate(-50%, -50%); opacity: 0.08; }   /* centred + very faint on mobile, sitting quietly behind the text */
   .nav-links {
     position: fixed; inset: 52px 0 auto 0;
     flex-direction: column; align-items: stretch; gap: 0;
