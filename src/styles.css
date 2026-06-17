@@ -332,8 +332,8 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.025em; line-height: 1.06; marg
 .beat--fullbleed .b-sub { max-width: 56ch; }
 
 /* centered statement (no diagram): a calm bridge between the split beats */
-.beat--center .wrap { max-width: 820px; margin-inline: auto; text-align: center; }
-.beat--center .b-head { font-size: clamp(2.3rem, 5.8vw, 4.8rem); }
+.beat--center .wrap { max-width: 960px; margin-inline: auto; text-align: center; }
+.beat--center .b-head { font-size: clamp(2.6rem, 7vw, 5.4rem); }
 .beat--center .b-sub { max-width: 48ch; margin-inline: auto; }
 .beat--fullbleed .wrap { position: relative; z-index: 2; }
 /* Game of Life living background (life.js) + a vignette to keep the copy legible. */
