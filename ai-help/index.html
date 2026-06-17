@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/icons/favicon-180.png" />
+  <link rel="canonical" href="https://archeum.io/ai-help/" />
+  <title>Building on Archeum - SDK Guide</title>
+  <meta name="description" content="A primer for developers (and AI assistants) building mobile apps on the Archeum SDK: Identity, Item, and Reactor primitives, AGE encryption, and the feeless mesh registry." />
+  <meta name="theme-color" content="#0d0d0d" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Archeum" />
+  <meta property="og:url" content="https://archeum.io/ai-help/" />
+  <meta property="og:title" content="Building on Archeum - SDK Guide" />
+  <meta property="og:description" content="A primer for developers (and AI assistants) building mobile apps on the Archeum SDK: Identity, Item, and Reactor primitives, AGE encryption, and the feeless mesh registry." />
+  <meta property="og:image" content="https://archeum.io/brand/banners/og-card.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Building on Archeum - SDK Guide" />
+  <meta name="twitter:description" content="A primer for developers (and AI assistants) building mobile apps on the Archeum SDK: Identity, Item, and Reactor primitives, AGE encryption, and the feeless mesh registry." />
+  <meta name="twitter:image" content="https://archeum.io/brand/banners/og-card.png" />
+  <link rel="stylesheet" href="/src/styles.css" />
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site-header scrolled">
+    <div class="wrap nav">
+      <a class="brand" href="/"><img src="/brand/apps/archeum/logo.png" alt="" /><span class="wordmark">Archeum</span></a>
+      <a class="doc-nav" href="https://archeum.dev" target="_blank" rel="noopener">Full docs ↗</a>
+    </div>
+  </header>
+
+  <main class="doc" id="main">
+    <a class="back" href="/">← Back to archeum.io</a>
+    <h1>Building on Archeum</h1>
+    <p class="updated">A primer for developers and AI assistants · the full reference lives at <a href="https://archeum.dev" target="_blank" rel="noopener">archeum.dev</a></p>
+
+    <div class="note">Archeum apps are <strong>mobile-only</strong> (Android for v1). Apps connect to the user's node - which runs on their phone - using their wallet credentials. Only the Archeum app itself provisions nodes; normal apps never do.</div>
+
+    <h2>The model in one breath</h2>
+    <p>Every user owns a node on their phone and a handle like <code>@alice</code>. Your app signs in as a user, then reads and writes data on that user's node over QUIC. There is <strong>no backend to run and no blockchain</strong> - handle ownership lives in Archeum's feeless mesh consensus, and the SDK resolves a handle to a node endpoint for you.</p>
+
+    <h2>Three primitives</h2>
+    <ul>
+      <li><strong>Identity</strong> - a user, addressed by handle. Creates Items and Reactors owned by that user.</li>
+      <li><strong>Item</strong> - key-value storage for arbitrary bytes, with optional end-to-end encryption. String, JSON, list, and nesting helpers included.</li>
+      <li><strong>Reactor</strong> - collaborative data structures for social features, invoked by any authenticated user and run in a sandbox on the owner's node.</li>
+    </ul>
+    <p>You build app-specific types (Profile, Post, Conversation, Event…) by composing these three.</p>
+
+    <h2>Encryption</h2>
+    <ul>
+      <li><strong>Default</strong>: items are end-to-end encrypted with <strong>AGE</strong> for the owner only. The key is generated on the device and never leaves it - the node operator cannot read the content.</li>
+      <li><strong>Public</strong>: mark an item public to store it unencrypted (readable by anyone on the network).</li>
+      <li><strong>Multi-recipient</strong>: encrypt for specific handles in addition to the owner; each recipient gets their own wrapped key.</li>
+    </ul>
+    <p>Wallet identity and signatures are <strong>Ed25519</strong>. Reads are public at the protocol level (any authenticated caller may attempt them), which is exactly why encryption exists: encrypted bytes stay private even though the read succeeds. Writes are owner-only.</p>
+
+    <h2>Reactor types</h2>
+    <ul>
+      <li><strong>HandleSet</strong> - a set of identities that reacted. Use for likes, follows, attendees.</li>
+      <li><strong>FirstCall</strong> - identity → data, first write wins. Use for RSVPs, poll votes.</li>
+      <li><strong>LastCall</strong> - identity → data, last write wins. Use for status, presence, location.</li>
+    </ul>
+    <p>Reactors are the only cross-identity write path. They run as sandboxed WASM on the node, can touch many items in a single call, and never see your encryption keys.</p>
+
+    <h2>A taste of the API</h2>
+    <pre class="guide">// Identity-based Profile, composing the primitives
+profile = Identity.new("alice")
+await profile.item("bio").put_string("Software engineer", public = true)
+
+post = profile.item("post-123")
+await post.put_string("My first post!", public = true)
+
+likes = post.reactor("likes", HandleSet)
+await likes.start()
+await likes.react()        // any signed-in user can like
+
+// private by default: encrypted to the owner's key only
+await profile.item("notes").put_string("just for me", public = false)</pre>
+
+    <h2>Authentication &amp; authorization</h2>
+    <ul>
+      <li>Sign in once; the SDK manages connection pooling and handle resolution.</li>
+      <li>Reads: any authenticated caller (encrypted data stays unreadable without the key).</li>
+      <li>Writes: owner-only.</li>
+      <li>Reactors: anyone can react; only the owner creates them.</li>
+      <li>Pub/Sub: anyone can subscribe; only the owner publishes.</li>
+    </ul>
+
+    <h2>Full reference</h2>
+    <p>This page is a primer. For the complete API - every method, the pub/sub streaming model, error handling, namespaces, and composition patterns - see the docs at <a href="https://archeum.dev" target="_blank" rel="noopener">archeum.dev</a>.</p>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap"><div class="footer-bottom"><span>© 2026 Archeum. All rights reserved.</span><span class="android"><span class="dot"></span> Android · v1 · open source</span></div></div>
+  </footer>
+</body>
+</html>

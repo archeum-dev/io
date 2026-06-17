@@ -1,1 +1,3 @@
+# Pretty-URL fallback: unknown paths fall back to the home page.
+# Real files (the landing page and each /privacy, /delete-* folder) are served directly.
 /*    /index.html   200

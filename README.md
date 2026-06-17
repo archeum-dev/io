@@ -1,16 +1,53 @@
-# React + Vite
+# archeum.io
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+The marketing site for [Archeum](https://archeum.io) - decentralized personal
+infrastructure that runs on your phone.
 
-Currently, two official plugins are available:
+A **static, framework-free** site: hand-written HTML, one stylesheet, and a
+small vanilla-JS file for scroll-driven motion. No React, no WebGL. Built and
+bundled with Vite so it deploys as plain static files.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Design
 
-## React Compiler
+Near-black canvas, a single system-font stack, and one accent: the app's
+molten-gold gradient (lifted from the Archeum seal). Type does the work.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Two restrained, `prefers-reduced-motion`-aware motion signatures:
 
-## Expanding the ESLint configuration
+- the hero **@handle** that rolls through a large pool of names, and
+- a 2px gold **scroll vein** pinned to the top edge that fills left-to-right
+  with scroll progress (physically tied to scroll position).
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Plus IntersectionObserver fade-up reveals as sections arrive. Content is fully
+visible without JavaScript - every bit of motion is a progressive enhancement.
+
+## Structure
+
+```
+index.html                 Landing page
+privacy/archeum/           Privacy policy - Archeum app
+privacy/social/            Privacy policy - Social app
+delete-account/            Account deletion guide
+delete-data/               App-data deletion guide
+ai-help/                   SDK primer (full reference at archeum.dev)
+src/styles.css             Design system + all components
+src/main.js                Header state, mobile nav, animated @handle, scroll vein, reveals
+public/                    Brand assets (submodule), _redirects, robots.txt, sitemap.xml
+```
+
+## Develop
+
+```bash
+npm install
+npm run dev        # local dev server
+npm run build      # → dist/  (static, deployable)
+npm run preview    # serve the production build
+```
+
+New routes are real HTML files; register them in `vite.config.js` under
+`build.rollupOptions.input`.
+
+> **Note:** the legal/support pages describe the current architecture
+> (node-on-phone, feeless mesh consensus, Ed25519, AGE - no blockchain, no
+> tenant sharing). Review the copy as publisher before relying on it for
+> compliance.

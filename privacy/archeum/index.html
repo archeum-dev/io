@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/icons/favicon-180.png" />
+  <link rel="canonical" href="https://archeum.io/privacy/archeum/" />
+  <title>Privacy Policy - Archeum</title>
+  <meta name="description" content="Privacy policy for the Archeum app: how your keys, handles, and data are handled. The publisher operates no servers that receive or store your data." />
+  <meta name="theme-color" content="#0d0d0d" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Archeum" />
+  <meta property="og:url" content="https://archeum.io/privacy/archeum/" />
+  <meta property="og:title" content="Privacy Policy - Archeum" />
+  <meta property="og:description" content="Privacy policy for the Archeum app: how your keys, handles, and data are handled. The publisher operates no servers that receive or store your data." />
+  <meta property="og:image" content="https://archeum.io/brand/banners/og-card.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Privacy Policy - Archeum" />
+  <meta name="twitter:description" content="Privacy policy for the Archeum app: how your keys, handles, and data are handled. The publisher operates no servers that receive or store your data." />
+  <meta name="twitter:image" content="https://archeum.io/brand/banners/og-card.png" />
+  <link rel="stylesheet" href="/src/styles.css" />
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site-header scrolled">
+    <div class="wrap nav">
+      <a class="brand" href="/"><img src="/brand/apps/archeum/logo.png" alt="" /><span class="wordmark">Archeum</span></a>
+      <a class="doc-nav" href="https://archeum.dev" target="_blank" rel="noopener">Docs ↗</a>
+    </div>
+  </header>
+
+  <main class="doc" id="main">
+    <a class="back" href="/">← Back to archeum.io</a>
+    <h1>Privacy Policy - Archeum</h1>
+    <p class="updated">Last updated: June 15, 2026</p>
+
+    <h2>Overview</h2>
+    <p>Archeum is a decentralized personal-infrastructure app - the wallet and key-management app for the Archeum network. The app stores cryptographic keys and identity data on your device and runs your node (the infrastructure that stores your data) <strong>on your own phone</strong>. Archeum the publisher does not operate servers that receive or store your data.</p>
+
+    <h2>Data stored on your device</h2>
+    <p>The app stores the following locally, in Android's encrypted secure storage:</p>
+    <ul>
+      <li>Your wallet private key (Ed25519) and recovery phrase</li>
+      <li>Your AGE encryption keypair</li>
+      <li>Your Archeum handle(s) and node identity</li>
+      <li>App settings and preferences</li>
+    </ul>
+    <p>These values never leave your device, except as described below.</p>
+
+    <h2>Your node runs on your phone</h2>
+    <p>Your Archeum node runs as a background (foreground) service on your phone, anchored to the device's secure hardware (StrongBox). The node stores your data locally and answers app requests on your behalf. There is no third-party server, VPS, or cloud account holding your data - the device in your pocket is the node.</p>
+
+    <h2>Data sent over the network</h2>
+    <ul>
+      <li><strong>The Archeum mesh</strong>: handle ownership lives in Archeum's own feeless, peer-to-peer consensus (there is no blockchain). To claim or resolve handles, your node exchanges signed messages with other nodes over the mesh. As with any peer-to-peer network, peers you connect to can see your IP address. There are no fees, no gas, and no third-party RPC provider.</li>
+      <li><strong>Your node</strong>: apps connect to the node on your phone over QUIC (UDP 443) to read and write your data. That data is under your control.</li>
+    </ul>
+
+    <h2>Data we (the publisher) receive</h2>
+    <p>By default, we receive <strong>nothing</strong>. No analytics, no telemetry, no crash reporting, no ad tracking.</p>
+    <p>If you tap <em>Settings → Send Feedback</em>, the app opens the system share sheet (or email app) with recent debug logs (up to ~50&nbsp;KB, normally kept only in memory; briefly written to a temp file for the share-sheet attachment, cleaned up by the OS) addressed to <code>contact@archeum.io</code>. Nothing is sent unless you choose to send it.</p>
+
+    <h2>Permissions</h2>
+    <ul>
+      <li><strong>Internet</strong>: connect to the mesh and serve your node.</li>
+      <li><strong>Notifications</strong>: Android requires a visible notification while the node runs as a foreground service.</li>
+      <li><strong>Bluetooth</strong>: provision a nearby Archeum node during first-time setup. Local-only; no data is transmitted over the internet via Bluetooth.</li>
+      <li><strong>Fine Location</strong>: Android requires it to scan for Bluetooth devices during provisioning. We do not read, store, or transmit your location.</li>
+      <li><strong>Battery optimization exemption</strong> (optional): so the node can stay reachable in the background. You control whether to grant it.</li>
+    </ul>
+
+    <h2>Local network communication</h2>
+    <p>During first-time node provisioning, the app may talk to a node on the local device using plaintext HTTP (e.g. <code>http://[::1]:8080</code>). This traffic never leaves the device. Once running, all communication with your node uses encrypted QUIC (TLS&nbsp;1.3).</p>
+
+    <h2>Third parties</h2>
+    <ul>
+      <li><strong>Google Play Services</strong> - for app distribution and (where used) hardware key attestation.</li>
+    </ul>
+    <p>Archeum does not use any blockchain, RPC provider, transaction bundler, or analytics vendor.</p>
+
+    <h2>Data deletion</h2>
+    <p>You can delete your account at any time: Settings → Delete Account. This wipes all data stored on your node (across every app namespace) and erases all local data (wallet keys, recovery phrase, secure storage). See <a href="/delete-account/">archeum.io/delete-account</a> for the full process.</p>
+    <p>Handle ownership lives in the mesh consensus, not on a blockchain. After deletion your node goes offline and your data is wiped; with nothing answering and no renewal, the handle lapses after its lease of silence (roughly two months) and the name becomes available again.</p>
+
+    <h2>Children</h2>
+    <p>Archeum is not intended for users under 18.</p>
+
+    <h2>Changes to this policy</h2>
+    <p>When this policy changes materially, we will update the date at the top and highlight changes in the app's release notes.</p>
+
+    <h2>Contact</h2>
+    <p>Questions: <a href="mailto:contact@archeum.io">contact@archeum.io</a></p>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap"><div class="footer-bottom"><span>© 2026 Archeum. All rights reserved.</span><span class="android"><span class="dot"></span> Android · v1 · open source</span></div></div>
+  </footer>
+</body>
+</html>

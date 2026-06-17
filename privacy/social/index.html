@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/icons/favicon-180.png" />
+  <link rel="canonical" href="https://archeum.io/privacy/social/" />
+  <title>Privacy Policy - Social</title>
+  <meta name="description" content="Privacy policy for Social, a decentralized social app on the Archeum network. Your data is written to the node you own; the publisher operates no servers." />
+  <meta name="theme-color" content="#0d0d0d" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Archeum" />
+  <meta property="og:url" content="https://archeum.io/privacy/social/" />
+  <meta property="og:title" content="Privacy Policy - Social" />
+  <meta property="og:description" content="Privacy policy for Social, a decentralized social app on the Archeum network. Your data is written to the node you own; the publisher operates no servers." />
+  <meta property="og:image" content="https://archeum.io/brand/banners/og-card.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Privacy Policy - Social" />
+  <meta name="twitter:description" content="Privacy policy for Social, a decentralized social app on the Archeum network. Your data is written to the node you own; the publisher operates no servers." />
+  <meta name="twitter:image" content="https://archeum.io/brand/banners/og-card.png" />
+  <link rel="stylesheet" href="/src/styles.css" />
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site-header scrolled">
+    <div class="wrap nav">
+      <a class="brand" href="/"><img src="/brand/apps/archeum/logo.png" alt="" /><span class="wordmark">Archeum</span></a>
+      <a class="doc-nav" href="https://archeum.dev" target="_blank" rel="noopener">Docs ↗</a>
+    </div>
+  </header>
+
+  <main class="doc" id="main">
+    <a class="back" href="/">← Back to archeum.io</a>
+    <h1>Privacy Policy - Social</h1>
+    <p class="updated">Last updated: June 15, 2026</p>
+
+    <h2>Overview</h2>
+    <p>Social is a decentralized social app built on the Archeum network. It connects to the node you own - running on your phone, through the Archeum app - to read and write your social data. Archeum the publisher does not operate servers that receive or store your data.</p>
+
+    <h2>Data stored on your device</h2>
+    <ul>
+      <li>Cached copies of your posts, profile, and other users' content you've viewed</li>
+      <li>App settings and preferences</li>
+      <li>Draft messages and unsent posts</li>
+    </ul>
+    <p>Sensitive credentials (wallet keys, encryption keys) are never handled by this app directly. They are held by the Archeum app on the same device, which signs operations on request.</p>
+
+    <h2>Data sent over the network</h2>
+    <ul>
+      <li><strong>Your node</strong>: posts, replies, likes, follows, messages, and profile updates are written to the node you own. You control what is public, what is encrypted, and who you share with.</li>
+      <li><strong>Other users' nodes</strong>: to read someone else's posts or send them a message, the app connects to that user's node (over QUIC) using their public Archeum handle.</li>
+      <li><strong>Handle resolution</strong>: to turn a handle like <code>@alice</code> into a node address, the app uses Archeum's feeless mesh consensus. There is no blockchain and no third-party lookup service.</li>
+    </ul>
+
+    <h2>What other users can see</h2>
+    <p>Content you publish publicly (public posts, profile name/bio, public likes and follows) is readable by anyone on the Archeum network and is stored unencrypted on your node.</p>
+    <p>Content you share with specific recipients (private posts, friends-only posts, direct messages) is end-to-end encrypted (AGE) to the recipients' public keys. Only they can decrypt it, even if someone else obtains the stored ciphertext.</p>
+    <p>Archeum handles are pseudonymous - they are not tied to your real name unless you choose to share it.</p>
+
+    <h2>Data we (the publisher) receive</h2>
+    <p>By default, <strong>nothing</strong>. No analytics, no telemetry, no crash reporting, no ad tracking.</p>
+    <p>If you tap <em>Settings → Send Feedback</em>, the app opens the system share sheet (or email app) with recent debug logs (up to ~50&nbsp;KB, normally kept only in memory; briefly written to a temp file for the share-sheet attachment, cleaned up by the OS) addressed to <code>contact@archeum.io</code>. Nothing is sent unless you choose to send it.</p>
+
+    <h2>User-generated content &amp; moderation</h2>
+    <p>Social does not moderate content centrally. You can block and mute other users locally. Content you block is filtered out of your own feed - it is not removed from the network. For reporting illegal content, contact <a href="mailto:contact@archeum.io">contact@archeum.io</a>; we will respond in line with applicable laws, but we do not control user-operated nodes.</p>
+
+    <h2>Permissions</h2>
+    <ul>
+      <li><strong>Internet</strong>: connect to nodes.</li>
+      <li><strong>Camera</strong>: take photos/videos to post.</li>
+      <li><strong>Storage</strong>: attach existing media to posts.</li>
+      <li><strong>Notifications</strong>: alert you to replies and messages.</li>
+    </ul>
+
+    <h2>Third parties</h2>
+    <ul>
+      <li><strong>Archeum app</strong> - handles all wallet signing and encryption on your behalf (same device only; no network).</li>
+      <li><strong>Google Play Services</strong> - for app distribution.</li>
+    </ul>
+    <p>Social does not use any blockchain or third-party handle-resolution service.</p>
+
+    <h2>Children</h2>
+    <p>Social is not intended for users under 18.</p>
+
+    <h2>Changes to this policy</h2>
+    <p>When this policy changes materially, we will update the date at the top and highlight changes in the app's release notes.</p>
+
+    <h2>Contact</h2>
+    <p>Questions: <a href="mailto:contact@archeum.io">contact@archeum.io</a></p>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap"><div class="footer-bottom"><span>© 2026 Archeum. All rights reserved.</span><span class="android"><span class="dot"></span> Android · v1 · open source</span></div></div>
+  </footer>
+</body>
+</html>

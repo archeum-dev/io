@@ -1,17 +1,218 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/png" href="/brand/apps/archeum/logo.png" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Genos&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.0.0/fonts/remixicon.css" rel="stylesheet">
-    <title>Archeum</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/icons/favicon-180.png" />
+  <link rel="canonical" href="https://archeum.io/" />
+  <title>Archeum</title>
+  <meta name="description" content="Grab a handle like @alice and it's yours. A new internet that runs on everyone's phones. No servers, no company, no fees." />
+  <meta name="theme-color" content="#0d0d0d" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Archeum" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:url" content="https://archeum.io/" />
+  <meta property="og:title" content="Archeum" />
+  <meta property="og:description" content="A handle like @alice, owned by you. A new internet that runs on everyone's phones." />
+  <meta property="og:image" content="https://archeum.io/brand/banners/og-card.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Archeum" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Archeum" />
+  <meta name="twitter:description" content="A handle like @alice, owned by you. A new internet that runs on everyone's phones." />
+  <meta name="twitter:image" content="https://archeum.io/brand/banners/og-card.png" />
+
+  <!-- Structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "name": "Archeum",
+        "url": "https://archeum.io/",
+        "logo": "https://archeum.io/brand/apps/archeum/logo.png",
+        "sameAs": [
+          "https://github.com/archeum-dev",
+          "https://discord.gg/cdyPcAzbhH",
+          "https://patreon.com/archeum"
+        ]
+      },
+      { "@type": "WebSite", "name": "Archeum", "url": "https://archeum.io/" }
+    ]
+  }
+  </script>
+  <script>
+    document.documentElement.className += ' js';
+    window.__revealFailsafe = setTimeout(function () {
+      var els = document.querySelectorAll('.reveal');
+      for (var i = 0; i < els.length; i++) els[i].classList.add('in');
+    }, 2500);
+  </script>
+  <link rel="stylesheet" href="/src/styles.css" />
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="vein" aria-hidden="true"></div>
+  <header class="site-header" id="header">
+    <div class="wrap nav">
+      <a class="brand" href="/" aria-label="Archeum home">
+        <img src="/brand/apps/archeum/logo.png" alt="" />
+        <span class="wordmark">Archeum</span>
+      </a>
+      <nav class="nav-links" id="navLinks" aria-label="Primary">
+        <a href="#phone">Overview</a>
+        <a href="#developers">Developers</a>
+        <a href="https://archeum.dev" target="_blank" rel="noopener">Docs</a>
+        <a class="nav-get" href="https://archeum.dev" target="_blank" rel="noopener">Get&nbsp;started&nbsp;›</a>
+      </nav>
+      <button class="nav-toggle" id="navToggle" aria-label="Menu" aria-expanded="false" aria-controls="navLinks">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- Hero: the handle moment -->
+    <section class="hero">
+      <img class="hero-bg" src="/brand/apps/archeum/logo.png" alt="" aria-hidden="true" decoding="async" />
+      <div class="wrap">
+        <p class="handle reveal" data-delay="1" aria-hidden="true">
+          <span class="at gold">@</span><span class="roll"><span class="name" id="handleName">alice</span></span>
+        </p>
+        <h1 class="h2 reveal" data-delay="2">A name that's yours.</h1>
+        <p class="sub reveal" data-delay="2">Grab your piece of the internet.</p>
+        <div class="hero-actions reveal" data-delay="3">
+          <a class="btn btn-primary" href="https://archeum.dev" target="_blank" rel="noopener">Get started</a>
+          <a class="tlink" href="#phone">See how it works <span class="chev">›</span></a>
+        </div>
+      </div>
+      <span class="scroll-cue" aria-hidden="true"><span class="line"></span>Scroll</span>
+    </section>
+
+    <!-- Beat 1: the wound - everything online is rented (flow: app servers -> your phone, white/inward) -->
+    <section class="beat beat--split" id="phone">
+      <div class="wrap reveal">
+        <div class="b-copy">
+          <h2 class="b-head">Your online identity is <span class="gold">everywhere</span>.</h2>
+          <p class="b-sub">Today, your name, messages, photos, medical data, and more are spread across many company-owned servers.</p>
+        </div>
+        <div class="b-aside" aria-hidden="true"><div class="flow-wrap" id="flowRent"></div></div>
+      </div>
+    </section>
+
+    <!-- Beat 2: the reclaim - your data lives on your phone -->
+    <section class="beat beat--split" id="pocket">
+      <div class="wrap reveal">
+        <div class="b-copy">
+          <h2 class="b-head">Now it lives in your <span class="gold">pocket</span>.</h2>
+          <p class="b-sub">With no server in the middle, apps get your identity from you.</p>
+        </div>
+        <div class="b-aside" aria-hidden="true"><div class="flow-wrap" id="flowPocket"></div></div>
+      </div>
+    </section>
+
+    <!-- Beat 3: why it can't die - the walkaway test (living Game of Life background) -->
+    <section class="beat beat--fullbleed tint" id="resilient">
+      <canvas class="life-bg" id="lifeBg" aria-hidden="true"></canvas>
+      <div class="wrap reveal">
+        <p class="dev-label">Users &amp; Players</p>
+        <h2 class="b-head">Apps and games <span class="gold">never die.</span></h2>
+        <p class="b-sub b-sub--center">With no servers to maintain, apps and games survive until the last person uninstalls.</p>
+      </div>
+    </section>
+
+    <!-- Beat 4: the builder's mirror - zero infrastructure -->
+    <section class="beat beat--split beat--mirror" id="developers">
+      <div class="wrap reveal">
+        <div class="b-aside">
+<pre class="code-card" aria-hidden="true"><code><span class="tok-c">// Send a message to Bob</span>
+<span class="tok-k">final</span> client = <span class="tok-k">await</span> <span class="tok-f">ArcheumClient.signIn</span>(<span class="tok-s">'alice'</span>);
+<span class="tok-k">final</span> bob = <span class="tok-k">await</span> client.<span class="tok-f">find</span>(<span class="tok-s">'bob'</span>);
+<span class="tok-k">await</span> bob.<span class="tok-f">inbox</span>(<span class="tok-s">'messages'</span>).<span class="tok-f">send</span>(<span class="tok-s">'Yo'</span>);</code></pre>
+          <div class="aside-divider" aria-hidden="true"></div>
+          <div class="aside-cost">
+            <span class="b-accent gold">$0</span>
+            <span class="b-cap">to run, at any size</span>
+          </div>
+        </div>
+        <div class="b-copy">
+          <p class="dev-label">Developers</p>
+          <h2 class="b-head">Build once,<br><span class="gold">run forever.</span></h2>
+          <p class="b-sub">No backend, no database, nothing to keep alive at 3am. Having a million users costs the same as having one.</p>
+          <div class="actions">
+            <a class="tlink" href="https://archeum.dev" target="_blank" rel="noopener">Read the docs <span class="chev">›</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Beat 5: CTA - claim your name, with the real app stacked alongside -->
+    <section class="beat beat--showcase tint" id="join">
+      <div class="wrap reveal">
+        <div class="b-copy">
+          <h2 class="b-head">Claim your <span class="gold">identity</span>.</h2>
+          <p class="b-sub">It takes a minute, it's free, and it's yours for good. Grab a handle, and come build the rest with us.</p>
+          <div class="actions">
+            <a class="btn btn-primary" href="https://archeum.dev" target="_blank" rel="noopener">Get started</a>
+            <a class="btn btn-ghost" href="https://discord.gg/cdyPcAzbhH" target="_blank" rel="noopener">Join the Discord</a>
+          </div>
+        </div>
+        <div class="phone-stack" aria-hidden="true">
+          <div class="shot-phone shot-phone--back"><img src="/app/right.png" alt="" decoding="async" /></div>
+          <div class="shot-phone shot-phone--front"><img src="/app/left.png" alt="" decoding="async" /></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a class="brand" href="/"><img src="/brand/apps/archeum/logo.png" alt="" /><span class="wordmark">Archeum</span></a>
+          <p>A new internet that runs on everyone's phones. No servers, no company, no fees.</p>
+        </div>
+        <div class="footer-cols">
+          <div class="footer-col">
+            <h4>Build</h4>
+            <ul>
+              <li><a href="https://archeum.dev" target="_blank" rel="noopener">Docs</a></li>
+              <li><a href="https://github.com/archeum-dev" target="_blank" rel="noopener">GitHub</a></li>
+              <li><a href="/ai-help/">SDK guide</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Community</h4>
+            <ul>
+              <li><a href="https://discord.gg/cdyPcAzbhH" target="_blank" rel="noopener">Discord</a></li>
+              <li><a href="https://patreon.com/archeum" target="_blank" rel="noopener">Patreon</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Legal</h4>
+            <ul>
+              <li><a href="/privacy/archeum/">Archeum privacy</a></li>
+              <li><a href="/privacy/social/">Social privacy</a></li>
+              <li><a href="/delete-account/">Delete account</a></li>
+              <li><a href="/delete-data/">Delete app data</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 Archeum. All rights reserved.</span>
+        <span class="android"><span class="dot"></span> Android · v1 · open source</span>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
 </html>

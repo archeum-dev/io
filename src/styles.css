@@ -1,0 +1,485 @@
+/* ============================================================
+   Archeum - dark, quiet, Apple-grade restraint.
+   Near-black canvas. One typeface. Type does the work.
+   Gold is the app's real metallic gradient (theme/archeum_theme.dart),
+   used as the single accent.
+   ============================================================ */
+
+:root {
+  /* Canvas - neutral grays from the app's surface ladder (no blue) */
+  --bg:        #0d0d0d;   /* app ArcheumColors.background - halfway to black */
+  --bg-1:      #1a1a1a;   /* tint - app surface (the insight-tile color) */
+  --bg-2:      #212121;   /* app surfaceRaised */
+  --panel:     #212121;
+
+  /* Ink */
+  --text:      #f5f5f7;   /* near-white */
+  --dim:       #a1a1a6;   /* secondary */
+  --dimmer:    #8a8a90;   /* tertiary - lifted to clear WCAG AA (>=4.5:1) on small text */
+
+  /* Gold - solid token for fine detail (markers, dots, borders, focus). */
+  --gold:      #d8a941;
+  --gold-soft: #ffecc0;
+
+  /* The metallic gold gradients, lifted from the app (ArcheumGradients). */
+  --grad-title: linear-gradient(180deg, #ffecc0 0%, #d4af37 35%, #b47a1a 70%, #7a4d0a 100%);
+  --grad-metal: linear-gradient(to top right, #7a4d0a 0%, #b47a1a 30%, #d4af37 65%, #ffecc0 100%);
+
+  --line:      rgba(255,255,255,0.10);
+  --line-soft: rgba(255,255,255,0.06);
+
+  --font: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text',
+          'Segoe UI', system-ui, Roboto, Helvetica, Arial, sans-serif;
+
+  --maxw: 1120px;
+  --measure: 680px;
+  --gutter: clamp(1.25rem, 5vw, 2.5rem);
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+
+  color-scheme: dark;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; scroll-padding-top: 0; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 17px;
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+  -webkit-user-select: none; user-select: none;   /* a polished, app-like surface; docs re-enable below */
+}
+
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+::selection { background: color-mix(in srgb, var(--gold) 30%, transparent); }
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; border-radius: 4px; }
+
+/* Skip-to-content: off-screen until focused, then slides into the top-left.
+   Reuses the existing tokens + gold focus ring - no new visual language. */
+.skip {
+  position: fixed; left: 0; top: 0; z-index: 200;
+  margin: 0.5rem; padding: 0.6rem 1rem;
+  background: var(--panel); color: var(--text);
+  border: 1px solid var(--line); border-radius: 8px;
+  font-size: 0.9rem; font-weight: 600;
+  transform: translateY(-130%);
+  transition: transform 0.2s var(--ease);
+}
+.skip:focus { transform: none; }
+
+/* Scroll vein - a 2px molten-gold hairline pinned to the top edge that fills
+   left-to-right with scroll progress. Driven by --vein (0..1) from main.js; the
+   gold sweep is anchored to the viewport and revealed via clip, so it grows
+   rather than stretches. Stays invisible (--vein:0) without JS. */
+.vein {
+  position: fixed; top: 0; left: 0; right: 0; height: 2px; z-index: 150;
+  pointer-events: none;
+  background: linear-gradient(90deg, #7a4d0a 0%, #b47a1a 24%, #d4af37 58%, #ffecc0 100%);
+  clip-path: inset(0 calc(100% - var(--vein, 0) * 100%) 0 0);
+}
+
+::-webkit-scrollbar { width: 0; height: 0; }
+* { scrollbar-width: none; }
+
+.wrap { width: 100%; max-width: var(--maxw); margin-inline: auto; padding-inline: var(--gutter); }
+
+/* ============================================================
+   Gold - clipped metallic text
+   ============================================================ */
+.gold {
+  background: var(--grad-title);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  /* extend the paint box so negative tracking can't clip the edge glyphs */
+  padding-inline: 0.08em; margin-inline: -0.08em;
+}
+/* ============================================================
+   Type
+   ============================================================ */
+h1, h2, h3 { font-weight: 600; letter-spacing: -0.025em; line-height: 1.06; margin: 0; }
+
+/* A clear, large section flag - non-devs see it and read on anyway. */
+.dev-label {
+  display: inline-block;
+  font-size: clamp(1.05rem, 2.6vw, 1.5rem);
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  margin: 0 0 1.1rem;
+  background: var(--grad-title);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+}
+
+.h2 { font-size: clamp(2rem, 5.2vw, 3.6rem); letter-spacing: -0.03em; }
+.sub {
+  font-size: clamp(1.15rem, 2.1vw, 1.55rem);
+  line-height: 1.4;
+  font-weight: 400;
+  color: var(--dim);
+  letter-spacing: -0.012em;
+}
+
+/* ============================================================
+   Buttons / links
+   ============================================================ */
+.btn {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  padding: 0.78rem 1.6rem;
+  border-radius: 980px;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  border: 1px solid transparent;
+  transition: filter 0.3s var(--ease), border-color 0.3s, transform 0.3s var(--ease), opacity 0.3s;
+  cursor: pointer;
+}
+.btn-primary { background: var(--grad-metal); color: #221704; border: 0; }
+.btn-primary:hover { filter: brightness(1.07) saturate(1.05); }
+.btn-ghost { border-color: var(--line); color: var(--text); }
+.btn-ghost:hover { border-color: rgba(255,255,255,0.32); }
+/* Touch press feedback - Android-first product, so tap (no hover) needs to register. */
+.btn:active { transform: scale(0.97); transition-duration: 0.06s; }
+.btn-primary:active { filter: brightness(0.98) saturate(1.05); }
+
+.tlink {
+  display: inline-flex; align-items: center; gap: 0.3rem;
+  font-size: 1.02rem; font-weight: 600;
+  background: var(--grad-title);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  transition: opacity 0.25s;
+}
+.tlink .chev { transition: transform 0.25s var(--ease); display: inline-block; }
+.tlink:hover { opacity: 0.82; }
+.tlink:hover .chev { transform: translateX(3px); }
+
+/* ============================================================
+   Header
+   ============================================================ */
+.site-header {
+  position: fixed; inset: 0 0 auto 0; z-index: 100;
+  height: 52px;
+  /* Transparent over the hero; the glass fades in once you start scrolling. */
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition: background 0.4s var(--ease), backdrop-filter 0.4s var(--ease), border-color 0.4s var(--ease);
+}
+.site-header.scrolled {
+  background: rgba(13,13,13,0.82);
+  backdrop-filter: saturate(160%) blur(18px);
+  -webkit-backdrop-filter: saturate(160%) blur(18px);
+  border-bottom-color: var(--line-soft);
+}
+.nav { display: flex; align-items: center; justify-content: space-between; height: 52px; }
+.brand { display: inline-flex; align-items: center; gap: 0.55rem; }
+.brand img { width: 22px; height: 22px; opacity: 0.95; }
+.brand .wordmark {
+  font-size: 1.02rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+  background: var(--grad-title);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+}
+.nav-links { display: flex; align-items: center; gap: 2rem; }
+.nav-links a { font-size: 0.86rem; color: var(--dim); transition: color 0.25s; }
+.nav-links a:hover { color: var(--text); }
+.nav-links .nav-get {
+  font-weight: 600;
+  background: var(--grad-title);
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+}
+.nav-toggle { display: none; }
+
+/* ============================================================
+   Hero - the handle moment
+   ============================================================ */
+.hero {
+  min-height: 100vh;           /* fallback for engines without svh */
+  min-height: 100svh;          /* never taller than the first-paint visible area, so the scroll cue isn't clipped under the mobile toolbar */
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 7rem 0 5rem;
+  position: relative;
+  overflow: hidden;            /* clip the oversized brand mark */
+}
+.hero .wrap { position: relative; z-index: 1; }
+
+/* Big brand mark bleeding off the left edge. Lives inside the hero, so it
+   scrolls away with the landing. No mask, kept subtle with opacity alone. */
+.hero-bg {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  transform: translate(-20%, -50%);
+  height: min(92vh, 1050px);   /* fits inside the hero, so nothing clips top or bottom */
+  width: auto;
+  max-width: none;             /* keep the real aspect ratio; never squish on mobile */
+  opacity: 0.5;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Animated @handle */
+.handle {
+  font-size: clamp(3.3rem, 11.5vw, 8.2rem);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  margin: 0 0 1.2rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text);
+}
+.handle .at { margin-right: 0.02em; line-height: 1.5; }
+.roll {
+  position: relative;
+  display: inline-block;
+  height: 1.5em;            /* generous, so the name never clips at rest */
+  line-height: 1.5em;
+  white-space: nowrap;
+  vertical-align: top;
+  clip-path: inset(0 -100vw 0 -100vw);   /* clip only top and bottom, never the sides */
+}
+/* Width is animated by script so the @ glides as the box grows or shrinks. */
+.roll.rolling { transition: width 0.7s cubic-bezier(0.5, 0, 0.2, 1); }
+.roll .name {
+  height: 1.5em;
+  line-height: 1.5em;
+  white-space: nowrap;
+}
+/* While JS runs, the two names stack and cross over together. Without JS the
+   single name just flows normally and sizes the box. */
+.roll.rolling .name {
+  position: absolute;
+  left: 0; right: 0; top: 0;
+  text-align: center;       /* centre the name in the box so resizing never shifts it */
+  transition: transform 0.7s cubic-bezier(0.5, 0, 0.2, 1), opacity 0.55s ease;
+  will-change: transform, opacity;
+}
+.roll.rolling .name.out   { transform: translateY(-100%); opacity: 0; }
+.roll.rolling .name.below { transition: none; transform: translateY(100%); opacity: 0; }
+
+.hero h1 { max-width: 18ch; margin: 0 auto; }
+.hero .sub { max-width: 32ch; margin: 1.3rem auto 0; }
+.hero-actions { display: flex; gap: 1.5rem; align-items: center; justify-content: center; flex-wrap: wrap; margin-top: 2.4rem; }
+
+.scroll-cue {
+  position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+  color: var(--dimmer); font-size: 0.78rem; letter-spacing: 0.02em;
+  display: inline-flex; flex-direction: column; align-items: center; gap: 0.5rem;
+}
+.scroll-cue .line { width: 1px; height: 34px; background: linear-gradient(var(--dimmer), transparent); }
+
+/* Tint - the alternating darker-surface section background. */
+.tint { background: var(--bg-1); }
+
+/* ============================================================
+   Beats - type-led "more heroes" below the hero. One idea, big
+   type, a single gold word, varied layouts, lots of black.
+   ============================================================ */
+/* Each beat is a full page that snaps into place, so the heroes land one at a time. */
+.beat { min-height: 100svh; display: grid; place-items: center; padding-block: clamp(4rem, 9vh, 7rem); }
+.b-head { font-weight: 600; letter-spacing: -0.03em; line-height: 1.06; margin: 0; font-size: clamp(2.1rem, 5.4vw, 4rem); }
+.b-sub { font-size: clamp(1.1rem, 2vw, 1.45rem); line-height: 1.45; color: var(--dim); letter-spacing: -0.012em; margin: 1.3rem 0 0; max-width: 34ch; }
+.b-sub--center { margin-inline: auto; }
+
+/* split: copy one side, an accent / breathing room the other */
+.beat--split .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 5vw, 5rem); align-items: center; }
+.beat--split .b-copy { text-align: left; }
+.beat--split .b-head { font-size: clamp(2.2rem, 5.1vw, 4.2rem); }
+.beat--split .b-aside { display: grid; place-items: center; gap: 0.7rem; }
+.beat--split .actions { margin-top: 1.6rem; }
+.beat--mirror .b-copy { order: 2; }   /* accent left, copy right */
+
+/* fullbleed statement: one huge line, deep margins */
+.beat--fullbleed { text-align: center; position: relative; overflow: hidden; }
+.beat--fullbleed .b-head { font-size: clamp(2.6rem, 8.8vw, 7rem); max-width: 16ch; margin-inline: auto; letter-spacing: -0.04em; }
+.beat--fullbleed .b-sub { max-width: 56ch; }
+.beat--fullbleed .wrap { position: relative; z-index: 2; }
+/* Game of Life living background (life.js) + a vignette to keep the copy legible. */
+.life-bg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+.beat--fullbleed::after {
+  content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: radial-gradient(ellipse 56% 46% at 50% 50%, rgba(13,13,13,0.8), rgba(13,13,13,0) 72%);
+}
+
+/* Flow diagrams (beats 1 & 2): a central phone, a ring of peers, and animated
+   particles. Drawn entirely in SVG so connectors stay aligned. Built in flow.js. */
+.flow-wrap { width: min(46vh, 440px, 86vw); margin-inline: auto; }
+svg.flow { display: block; width: 100%; height: auto; }
+.flow-line { stroke-linecap: round; fill: none; }   /* base colour + width set inline (gray / metallic gold; ring dimmed) */
+.flow-burst { stroke-linecap: round; fill: none; }  /* gradient-wave stroke + width set inline (white / pale-gold shine) */
+.flow-server-body { fill: var(--bg-1); stroke: var(--line); stroke-width: 1.2; }
+.flow-rack { stroke: var(--line-soft); stroke-width: 1; }
+.flow-led { fill: var(--dimmer); }
+.flow-phone-body { fill: var(--bg-1); stroke: var(--line); stroke-width: 1.2; }
+.flow-screen { fill: #000; }
+.gold-phone .flow-phone-body { stroke: var(--gold); }
+.flow-seal { filter: drop-shadow(0 0 9px rgba(216,169,65,0.35)); }
+
+/* Showcase (beat 5): the CTA beside the real app - two phones stacked, left.png
+   in front, right.png peeking out from behind. */
+.beat--showcase .wrap { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: clamp(2rem, 6vw, 6rem); }
+.beat--showcase .b-copy { text-align: left; }
+.beat--showcase .b-sub { margin-inline: 0; }
+.beat--showcase .actions { margin-top: 2.2rem; display: flex; gap: 1.25rem; justify-content: flex-start; flex-wrap: wrap; }
+
+/* base phone (defined before the --front/--back modifiers so they win) */
+.shot-phone {
+  aspect-ratio: 9 / 19.5; background: var(--bg-1); position: relative;
+  border: 1px solid var(--line); border-radius: clamp(18px, 1.9vw, 26px);
+  padding: 14px 6px 7px;   /* forehead for the speaker pill */
+}
+.shot-phone::before {   /* top speaker pill - reads as a phone */
+  content: ""; position: absolute; left: 50%; top: 6px; transform: translateX(-50%);
+  width: 18%; height: 4px; border-radius: 3px; background: var(--line); z-index: 3;
+}
+.shot-phone img { width: 100%; height: 100%; object-fit: cover; border-radius: clamp(9px, 1.1vw, 15px); display: block; }
+
+.phone-stack { position: relative; width: clamp(156px, 16vw, 212px); justify-self: center; margin-right: clamp(2rem, 5vw, 4.5rem); }
+.phone-stack .shot-phone { width: 100%; }
+.shot-phone--front { z-index: 2; }
+.shot-phone--back { position: absolute; top: 0; left: 0; z-index: 1; transform: translate(30%, -2%) rotate(5deg) scale(0.94); opacity: 0.88; }
+
+@media (max-width: 900px) {
+  .beat--showcase .wrap { grid-template-columns: 1fr; justify-items: center; }
+  .beat--showcase .b-copy { text-align: center; }
+  .beat--showcase .b-sub { margin-inline: auto; }
+  .beat--showcase .actions { justify-content: center; }
+  .phone-stack { margin: 2.5rem auto 0; width: clamp(150px, 52vw, 196px); }
+}
+
+/* the enormous $0 accent for the developer beat */
+.b-cap { font-size: 0.9rem; color: var(--dimmer); letter-spacing: 0.01em; }
+
+/* Developer beat code card - "your whole backend" in a few lines. Gold strings
+   are the only accent; comment dim, methods bright, keywords muted. */
+.code-card {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  /* sized to the column (cqi), so the longest line fits whether the aside is a
+     half-column on desktop or full-width on mobile */
+  font-size: clamp(0.7rem, 3.05cqi, 1.05rem); line-height: 1.8;
+  text-align: left; margin: 0; white-space: pre; overflow-x: auto;
+  color: var(--text); background: var(--bg-1);   /* white vars + punctuation */
+  border: 1px solid var(--line-soft); border-radius: 14px;
+  padding: 1rem 0.95rem; max-width: 100%;
+}
+.code-card .tok-c { color: #806c45; font-style: italic; }   /* bronze comment */
+.code-card .tok-k { color: #5d5d63; }                       /* keywords: darkest, recessed */
+.code-card .tok-f { color: var(--gold); }                   /* gold methods */
+.code-card .tok-s { color: var(--gold-soft); }              /* pale-gold strings */
+
+/* "run forever = free": a light divider under the code, then the big $0 */
+.aside-divider { width: 80%; max-width: 300px; height: 1px; background: linear-gradient(90deg, transparent, var(--line), transparent); }
+.aside-cost { display: grid; place-items: center; gap: 0.4rem; }
+.b-accent { font-size: clamp(3.8rem, 9vw, 7rem); font-weight: 600; letter-spacing: -0.035em; line-height: 1; }
+.beat--mirror .b-aside { gap: clamp(1.2rem, 3vh, 2rem); container-type: inline-size; }
+
+@media (max-width: 820px) {
+  .beat--split .wrap { grid-template-columns: 1fr; }
+  .beat--mirror .b-copy { order: 0; }
+  .beat--split .b-aside { order: 2; margin-top: 0.5rem; }
+}
+
+
+/* ============================================================
+   Footer
+   ============================================================ */
+.site-footer { border-top: 1px solid var(--line-soft); padding-block: 3.5rem 2.5rem; font-size: 0.82rem; color: var(--dimmer); }
+.footer-top { display: flex; flex-wrap: wrap; gap: 2.5rem 4rem; justify-content: space-between; }
+.footer-brand { max-width: 30ch; }
+.footer-brand .brand { margin-bottom: 0.9rem; }
+.footer-brand p { margin: 0; line-height: 1.5; }
+.footer-cols { display: flex; gap: 4rem; flex-wrap: wrap; }
+.footer-col h4 { font-size: 0.82rem; font-weight: 600; color: var(--text); margin: 0 0 0.9rem; }
+.footer-col ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.6rem; }
+.footer-col a { color: var(--dim); transition: color 0.25s; }
+.footer-col a:hover { color: var(--text); }
+.footer-bottom {
+  margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--line-soft);
+  display: flex; flex-wrap: wrap; gap: 0.6rem; justify-content: space-between; align-items: center;
+}
+.footer-bottom .android { display: inline-flex; align-items: center; gap: 0.45rem; }
+.footer-bottom .android .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--grad-metal); }
+
+/* ============================================================
+   Scroll reveal
+   ============================================================ */
+.reveal { transition: opacity 0.9s var(--ease), transform 0.9s var(--ease); }
+/* Hint the compositor only while the reveal is pending; release it once settled
+   (these are one-shot - main.js unobserves after the first intersection). */
+html.js .reveal { opacity: 0; transform: translateY(22px); will-change: opacity, transform; }
+html.js .reveal.in { opacity: 1; transform: none; will-change: auto; }
+.reveal[data-delay="1"] { transition-delay: 0.09s; }
+.reveal[data-delay="2"] { transition-delay: 0.18s; }
+.reveal[data-delay="3"] { transition-delay: 0.27s; }
+
+/* ============================================================
+   Document pages (legal / guide)
+   ============================================================ */
+.doc { max-width: var(--measure); margin-inline: auto; padding: clamp(7rem, 14vh, 9rem) var(--gutter) 6rem; -webkit-user-select: text; user-select: text; }
+.doc-nav { font-size: 0.9rem; color: var(--dim); transition: color 0.25s; }
+.doc-nav:hover { color: var(--text); }
+.doc .back { font-size: 0.9rem; color: var(--dim); display: inline-flex; gap: 0.35rem; margin-bottom: 2.5rem; }
+.doc .back:hover { color: var(--text); }
+.doc h1 { font-size: clamp(2rem, 4.6vw, 3rem); letter-spacing: -0.03em; margin: 0 0 0.6rem; }
+.doc .updated { font-size: 0.9rem; color: var(--dimmer); margin: 0 0 3rem; }
+.doc h2 { font-size: 1.35rem; letter-spacing: -0.02em; margin: 2.8rem 0 0.9rem; padding-top: 1.6rem; border-top: 1px solid var(--line-soft); }
+.doc h3 { font-size: 1.08rem; margin: 1.8rem 0 0.6rem; color: var(--text); }
+.doc p, .doc li { color: var(--dim); line-height: 1.65; }
+.doc p { margin: 0 0 1rem; }
+.doc ul, .doc ol { margin: 0 0 1.2rem; padding-left: 1.3rem; }
+.doc li { margin-bottom: 0.55rem; }
+.doc li::marker { color: var(--dimmer); }
+.doc strong { color: var(--text); font-weight: 600; }
+.doc a { color: var(--gold); }
+.doc a:hover { color: var(--gold-soft); }
+.doc code { font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace; font-size: 0.85em; background: var(--bg-2); border: 1px solid var(--line-soft); padding: 0.1em 0.42em; border-radius: 6px; color: var(--gold-soft); }
+.doc .note { background: var(--bg-1); border: 1px solid var(--line-soft); border-left: 2px solid var(--gold); border-radius: 10px; padding: 1rem 1.2rem; margin: 0 0 1.5rem; color: var(--dim); font-size: 0.95rem; }
+.doc pre.guide { font-family: ui-monospace, 'SF Mono', Menlo, Consolas, monospace; font-size: 0.84rem; line-height: 1.6; background: var(--bg-1); border: 1px solid var(--line-soft); border-radius: 12px; padding: 1.3rem; overflow-x: auto; color: var(--dim); white-space: pre-wrap; word-break: break-word; }
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media (max-width: 820px) {
+  body { font-size: 16px; }
+  .hero-bg { opacity: 0.3; }   /* dimmer on mobile, where it sits behind the centred text */
+  .nav-links {
+    position: fixed; inset: 52px 0 auto 0;
+    flex-direction: column; align-items: stretch; gap: 0;
+    background: rgba(13,13,13,0.96);
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--line-soft);
+    padding: 0.4rem var(--gutter) 1.1rem;
+    transform: translateY(-130%);
+    transition: transform 0.35s var(--ease);
+  }
+  .nav-links.open { transform: none; }
+  .nav-links a { padding: 0.85rem 0; border-bottom: 1px solid var(--line-soft); font-size: 0.95rem; }
+  .nav-toggle {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 38px; height: 38px; background: transparent; border: 1px solid var(--line);
+    border-radius: 9px; color: var(--text); cursor: pointer;
+  }
+  .footer-cols { gap: 2.5rem; }
+}
+
+/* ============================================================
+   Reduced motion
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+  html.js .reveal { opacity: 1; transform: none; }
+  .btn:active { transform: none; }   /* the press scale is a static value, so neutralize it explicitly */
+}

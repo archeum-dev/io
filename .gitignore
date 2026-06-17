@@ -12,6 +12,10 @@ dist
 dist-ssr
 *.local
 
+# Vite dev pre-bundle cache (Vite 7 writes to node_modules/.vite; this root
+# dir is a stale artifact from an earlier prototype - ignored defensively).
+.vite
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

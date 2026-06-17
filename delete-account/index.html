@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/icons/favicon-180.png" />
+  <link rel="canonical" href="https://archeum.io/delete-account/" />
+  <title>Deleting Your Archeum Account</title>
+  <meta name="description" content="How to fully delete your Archeum account. Because the publisher operates no servers, deletion is something you perform yourself, directly in the app." />
+  <meta name="theme-color" content="#0d0d0d" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Archeum" />
+  <meta property="og:url" content="https://archeum.io/delete-account/" />
+  <meta property="og:title" content="Deleting Your Archeum Account" />
+  <meta property="og:description" content="How to fully delete your Archeum account. Because the publisher operates no servers, deletion is something you perform yourself, directly in the app." />
+  <meta property="og:image" content="https://archeum.io/brand/banners/og-card.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Deleting Your Archeum Account" />
+  <meta name="twitter:description" content="How to fully delete your Archeum account. Because the publisher operates no servers, deletion is something you perform yourself, directly in the app." />
+  <meta name="twitter:image" content="https://archeum.io/brand/banners/og-card.png" />
+  <link rel="stylesheet" href="/src/styles.css" />
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site-header scrolled">
+    <div class="wrap nav">
+      <a class="brand" href="/"><img src="/brand/apps/archeum/logo.png" alt="" /><span class="wordmark">Archeum</span></a>
+      <a class="doc-nav" href="https://archeum.dev" target="_blank" rel="noopener">Docs ↗</a>
+    </div>
+  </header>
+
+  <main class="doc" id="main">
+    <a class="back" href="/">← Back to archeum.io</a>
+    <h1>Deleting Your Archeum Account</h1>
+    <p class="updated">Last updated: June 15, 2026</p>
+
+    <h2>How Archeum differs from typical apps</h2>
+    <p>Archeum is a decentralized personal-infrastructure layer. The Archeum app is where you create your wallet, claim a handle, and manage the node that stores your data - a node that runs on your own phone. <strong>The app publisher does not operate any servers that store your data.</strong> There is no central database of user accounts for us to delete from.</p>
+    <p>Your Archeum account consists of three parts, each of which you fully control:</p>
+    <ol>
+      <li><strong>Your wallet keys</strong> - stored in encrypted on-device storage on your phone.</li>
+      <li><strong>Your handle</strong> (e.g. <code>@alice</code>) - owned in Archeum's feeless mesh consensus.</li>
+      <li><strong>Your node storage</strong> - your data, stored on the Archeum node running on your phone. Each app (like Social) writes its data here in its own isolated namespace.</li>
+    </ol>
+
+    <h2>How to delete your account</h2>
+    <p>Because no publisher-side record exists, deletion is something you perform yourself - directly in the app.</p>
+
+    <h3>1. Use the in-app Delete Account flow (recommended)</h3>
+    <p>Open the Archeum app → Settings → <strong>Delete Account</strong>. You'll be asked to type "delete" as confirmation. Once confirmed, the app will:</p>
+    <ol>
+      <li>Wipe all data stored on your node, across every app's namespace.</li>
+      <li>Clear all local secure storage (wallet keys, recovery phrase, app settings).</li>
+      <li>Sign you out.</li>
+    </ol>
+    <p>After deletion completes, you're returned to the welcome screen. Uninstall the app to remove any remaining cache files.</p>
+
+    <h3>2. Alternative: clear one app at a time</h3>
+    <p>If you prefer to selectively remove data before deleting your account, tap your identity card → <strong>Storage</strong> → <strong>Apps</strong> tab. For each app, tap <strong>Clear data</strong> to delete its stored content from your node. See <a href="/delete-data/">Deleting App Data</a> for details.</p>
+
+    <h3>3. What happens to your handle</h3>
+    <p>Your handle is owned in the mesh consensus, not on a blockchain. After deletion your node goes offline and your data is wiped. With nothing answering on your behalf and no renewal, your handle lapses after its lease of silence (roughly two months) and the name becomes available for someone else to claim. No one can interact with you through it in the meantime.</p>
+
+    <h2>What data is deleted vs. retained</h2>
+    <ul>
+      <li><strong>Deleted by the in-app flow</strong>: all data stored on your node (every namespace) + all on-device data (wallet keys, recovery phrase, app settings, secure storage). This happens in a single operation when you confirm deletion.</li>
+      <li><strong>Deleted on uninstall</strong>: any remaining app cache files not covered by the deletion flow.</li>
+      <li><strong>Retained by the publisher</strong>: nothing - see below.</li>
+    </ul>
+
+    <h2>What the publisher retains</h2>
+    <p><strong>Nothing.</strong> The app publisher operates no servers that receive or store your data. We cannot delete or retain anything on your behalf because we never had it.</p>
+    <p>If you previously sent us a feedback email (Settings → Send Feedback), we may retain that email thread in our inbox per normal email practice. To request deletion of your feedback email, contact <a href="mailto:contact@archeum.io">contact@archeum.io</a>.</p>
+
+    <h2>Need help?</h2>
+    <p>Questions: <a href="mailto:contact@archeum.io">contact@archeum.io</a></p>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap"><div class="footer-bottom"><span>© 2026 Archeum. All rights reserved.</span><span class="android"><span class="dot"></span> Android · v1 · open source</span></div></div>
+  </footer>
+</body>
+</html>
