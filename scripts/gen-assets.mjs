@@ -100,7 +100,7 @@ async function buildCard() {
   drawTracked(ctx, 'ARCHEUM', cx, 300, 9)
 
   // Headline (the catchphrase) - auto-fit so a longer line never crowds the edges.
-  const HEAD = "A name that's yours."
+  const HEAD = "The server in your pocket."
   let hs = 80
   ctx.font = `${hs}px "${SEMIBOLD}"`
   while (ctx.measureText(HEAD).width > 1060 && hs > 44) { hs -= 2; ctx.font = `${hs}px "${SEMIBOLD}"` }
@@ -110,7 +110,7 @@ async function buildCard() {
   // Subhead - the paired subtext, dim.
   ctx.font = `31px "${REGULAR}"`
   ctx.fillStyle = '#a1a1a6'
-  ctx.fillText('Claim your part of the internet.', cx, 452)
+  ctx.fillText('No company, no fees, no catch.', cx, 452)
 
   // Domain tag at the foot, quiet gold.
   ctx.font = `25px "${SEMIBOLD}"`

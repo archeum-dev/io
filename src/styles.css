@@ -216,6 +216,10 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.025em; line-height: 1.06; marg
   overflow: hidden;            /* clip the oversized brand mark */
 }
 .hero .wrap { position: relative; z-index: 1; }
+.hero::after {
+  content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background: radial-gradient(ellipse 80% 40% at 50% 50%, rgba(13,13,13,0.85), rgba(13,13,13,0) 75%);
+}
 
 /* Big brand mark bleeding off the left edge. Lives inside the hero, so it
    scrolls away with the landing. No mask, kept subtle with opacity alone. */
@@ -272,7 +276,7 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.025em; line-height: 1.06; marg
 .roll.rolling .name.out   { transform: translateY(-100%); opacity: 0; }
 .roll.rolling .name.below { transition: none; transform: translateY(100%); opacity: 0; }
 
-.hero h1 { max-width: 18ch; margin: 0 auto; }
+.hero h1 { max-width: none; margin: 0 auto; white-space: nowrap; }
 .hero .sub { max-width: 32ch; margin: 1.3rem auto 0; }
 .hero-actions { display: flex; gap: 1.5rem; align-items: center; justify-content: center; flex-wrap: wrap; margin-top: 2.4rem; }
 
@@ -282,6 +286,38 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.025em; line-height: 1.06; marg
   display: inline-flex; flex-direction: column; align-items: center; gap: 0.5rem;
 }
 .scroll-cue .line { width: 1px; height: 34px; background: linear-gradient(var(--dimmer), transparent); }
+
+/* ============================================================
+   Mode toggle (server / identity)
+   ============================================================ */
+.t-i { display: none; }
+body.identity-mode .t-s { display: none; }
+body.identity-mode .t-i { display: inline; }
+
+.mode-switch {
+  display: inline-flex; align-items: center; gap: 0.55rem;
+  cursor: pointer; margin-top: 1.8rem;
+}
+.mode-switch input { position: absolute; opacity: 0; pointer-events: none; }
+.switch-track {
+  width: 34px; height: 18px; border-radius: 9px;
+  background: var(--bg-2); border: 1px solid var(--line);
+  position: relative; flex-shrink: 0;
+  transition: background 0.3s var(--ease), border-color 0.3s var(--ease);
+}
+.switch-thumb {
+  position: absolute; top: 2px; left: 2px;
+  width: 12px; height: 12px; border-radius: 50%;
+  background: var(--dimmer);
+  transition: transform 0.3s var(--ease), background 0.3s;
+}
+body.identity-mode .switch-track { background: rgba(216,169,65,0.12); border-color: var(--gold); }
+body.identity-mode .switch-thumb { transform: translateX(16px); background: var(--gold); }
+.switch-label {
+  font-size: 0.78rem; color: var(--dimmer); letter-spacing: 0.01em;
+  transition: color 0.3s;
+}
+body.identity-mode .switch-label { color: var(--gold); }
 
 /* Tint - the alternating darker-surface section background. */
 .tint { background: var(--bg-1); }
@@ -518,12 +554,6 @@ html.js .reveal.in { opacity: 1; transform: none; will-change: auto; }
      mandatory snap from trapping a too-tall section on short phones). */
   .beat { padding-block: clamp(2.5rem, 6vh, 4.5rem); }
   .hero-bg { left: 0; top: 50%; bottom: auto; transform: translate(-45%, -50%); opacity: 0.35; }   /* vertically centred, 45% off the left */
-  /* localised darkening behind the hero text (not a full-screen dim): a soft
-     radial that sits above the logo (z0) but below the copy (z1). */
-  .hero::after {
-    content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
-    background: radial-gradient(ellipse 76% 54% at 50% 52%, rgba(13,13,13,0.72), rgba(13,13,13,0) 76%);
-  }
   /* Native page-at-a-time on touch: halt at every section even on a fast fling,
      and stay in step with the URL bar. Replaces the JS touch pager that fought
      native momentum (the "scrolls past everything" jank). */

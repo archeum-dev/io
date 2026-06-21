@@ -26,6 +26,21 @@ if (navToggle && navLinks) {
   );
 }
 
+/* ---- Mode toggle (server / identity) ---- */
+const modeSwitch = document.getElementById('modeSwitch');
+if (modeSwitch) {
+  try {
+    if (localStorage.getItem('mode') === 'identity') {
+      document.body.classList.add('identity-mode');
+      modeSwitch.checked = true;
+    }
+  } catch {}
+  modeSwitch.addEventListener('change', () => {
+    document.body.classList.toggle('identity-mode', modeSwitch.checked);
+    try { localStorage.setItem('mode', modeSwitch.checked ? 'identity' : 'server'); } catch {}
+  });
+}
+
 /* ---- Header background on scroll ---- */
 const header = document.getElementById('header');
 let ticking = false;
