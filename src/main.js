@@ -41,6 +41,33 @@ if (modeSwitch) {
   });
 }
 
+/* ---- Mode toggle visibility: a fixed bottom-right overlay that rides the first
+       three pages (hero + the two split beats), hides through the middle, and
+       returns for the final CTA where "Claim your identity" lives. Shown while
+       any of those sections is at least half on screen. ---- */
+const modeSwitchEl = modeSwitch && modeSwitch.closest('.mode-switch');
+if (modeSwitchEl) {
+  const targets = ['.hero', '#phone', '#pocket', '#join']
+    .map((s) => document.querySelector(s))
+    .filter(Boolean);
+  if ('IntersectionObserver' in window && targets.length) {
+    const onPage = new Set();
+    const switchIO = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (e.intersectionRatio >= 0.5) onPage.add(e.target);
+          else onPage.delete(e.target);
+        });
+        modeSwitchEl.classList.toggle('show', onPage.size > 0);
+      },
+      { threshold: 0.5 }
+    );
+    targets.forEach((t) => switchIO.observe(t));
+  } else {
+    modeSwitchEl.classList.add('show');   // no IntersectionObserver: keep it visible
+  }
+}
+
 /* ---- Header background on scroll ---- */
 const header = document.getElementById('header');
 let ticking = false;

@@ -121,6 +121,11 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.025em; line-height: 1.06; marg
   -webkit-background-clip: text; background-clip: text;
   -webkit-text-fill-color: transparent; color: transparent;
 }
+/* Resilient beat's lead-in reads as white, matching the title (not gold). */
+#resilient .dev-label {
+  background: none;
+  -webkit-text-fill-color: var(--text); color: var(--text);
+}
 
 .h2 { font-size: clamp(2rem, 5.2vw, 3.6rem); letter-spacing: -0.03em; }
 .sub {
@@ -218,7 +223,7 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.025em; line-height: 1.06; marg
 .hero .wrap { position: relative; z-index: 1; }
 .hero::after {
   content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
-  background: radial-gradient(ellipse 80% 40% at 50% 50%, rgba(13,13,13,0.85), rgba(13,13,13,0) 75%);
+  background: radial-gradient(ellipse 82% 44% at 50% 50%, rgba(13,13,13,0.93), rgba(13,13,13,0) 78%);
 }
 
 /* Big brand mark bleeding off the left edge. Lives inside the hero, so it
@@ -247,7 +252,7 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.025em; line-height: 1.06; marg
   justify-content: center;
   color: var(--text);
 }
-.handle .at { margin-right: 0.02em; line-height: 1.5; }
+.handle .at { margin-right: -0.05em; line-height: 1.5; }
 .roll {
   position: relative;
   display: inline-block;
@@ -278,14 +283,14 @@ h1, h2, h3 { font-weight: 600; letter-spacing: -0.025em; line-height: 1.06; marg
 
 .hero h1 { max-width: none; margin: 0 auto; white-space: nowrap; }
 .hero .sub { max-width: 32ch; margin: 1.3rem auto 0; }
-.hero-actions { display: flex; gap: 1.5rem; align-items: center; justify-content: center; flex-wrap: wrap; margin-top: 2.4rem; }
 
 .scroll-cue {
   position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
   color: var(--dimmer); font-size: 0.78rem; letter-spacing: 0.02em;
   display: inline-flex; flex-direction: column; align-items: center; gap: 0.5rem;
 }
-.scroll-cue .line { width: 1px; height: 34px; background: linear-gradient(var(--dimmer), transparent); }
+.scroll-cue .line { width: 1px; height: 34px; background: linear-gradient(var(--dimmer), transparent); animation: scroll-bob 1.8s var(--ease) infinite; }
+@keyframes scroll-bob { 0%, 100% { transform: translateY(0); opacity: 0.8; } 50% { transform: translateY(7px); opacity: 1; } }
 
 /* ============================================================
    Mode toggle (server / identity)
@@ -295,9 +300,13 @@ body.identity-mode .t-s { display: none; }
 body.identity-mode .t-i { display: inline; }
 
 .mode-switch {
+  position: fixed; bottom: 1.8rem; right: var(--gutter); z-index: 90;
   display: inline-flex; align-items: center; gap: 0.55rem;
-  cursor: pointer; margin-top: 1.8rem;
+  cursor: pointer;
+  opacity: 0; pointer-events: none;        /* shown only on the relevant pages (see main.js) */
+  transition: opacity 0.4s var(--ease);
 }
+.mode-switch.show { opacity: 1; pointer-events: auto; }
 .mode-switch input { position: absolute; opacity: 0; pointer-events: none; }
 .switch-track {
   width: 34px; height: 18px; border-radius: 9px;
@@ -328,14 +337,16 @@ body.identity-mode .switch-label { color: var(--gold); }
    ============================================================ */
 /* Each beat is a full page that snaps into place, so the heroes land one at a time. */
 .beat { min-height: 100vh; min-height: 100dvh; display: grid; place-items: center; padding-block: clamp(4rem, 9vh, 7rem); }
-.b-head { font-weight: 600; letter-spacing: -0.03em; line-height: 1.06; margin: 0; font-size: clamp(2.1rem, 5.4vw, 4rem); }
+.b-head { font-weight: 600; letter-spacing: -0.03em; line-height: 1.06; margin: 0; font-size: clamp(1.75rem, 4.5vw, 2.9rem); }
 .b-sub { font-size: clamp(1.1rem, 2vw, 1.45rem); line-height: 1.45; color: var(--dim); letter-spacing: -0.012em; margin: 1.3rem 0 0; max-width: 34ch; }
 .b-sub--center { margin-inline: auto; }
+/* Quiet supporting line under a subtext (e.g. the scaling footnote on beat 2). */
+.b-note { font-size: 0.8rem; line-height: 1.45; color: #6a6a72; margin: 0.8rem 0 0; max-width: 34ch; }
 
 /* split: copy one side, an accent / breathing room the other */
 .beat--split .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 5vw, 5rem); align-items: center; }
 .beat--split .b-copy { text-align: left; }
-.beat--split .b-head { font-size: clamp(2.2rem, 5.1vw, 4.2rem); }
+.beat--split .b-head { font-size: clamp(1.85rem, 4.25vw, 2.2rem); }
 .beat--split .b-aside { display: grid; place-items: center; gap: 0.7rem; }
 .beat--split .actions { margin-top: 1.6rem; }
 /* Dev beat (desktop): a centered vertical flow - header, large title, then a
@@ -349,7 +360,7 @@ body.identity-mode .switch-label { color: var(--gold); }
   text-align: center;
   row-gap: clamp(1.4rem, 3.2vh, 2.4rem);
 }
-.beat--mirror .b-head { white-space: nowrap; font-size: clamp(2.4rem, 5.2vw, 4rem); }
+.beat--mirror .b-head { white-space: nowrap; font-size: clamp(2rem, 4.35vw, 2.9rem); }
 /* the centered [ $0 | vertical divider | code ] band */
 .beat--mirror .dev-band {
   display: flex; align-items: center; justify-content: center;
@@ -364,12 +375,12 @@ body.identity-mode .switch-label { color: var(--gold); }
 
 /* fullbleed statement: one huge line, deep margins */
 .beat--fullbleed { text-align: center; position: relative; overflow: hidden; }
-.beat--fullbleed .b-head { font-size: clamp(2.6rem, 8.8vw, 7rem); max-width: 16ch; margin-inline: auto; letter-spacing: -0.04em; }
+.beat--fullbleed .b-head { font-size: clamp(2.2rem, 7.3vw, 5.1rem); max-width: 16ch; margin-inline: auto; letter-spacing: -0.04em; }
 .beat--fullbleed .b-sub { max-width: 56ch; }
 
 /* centered statement (no diagram): a calm bridge between the split beats */
 .beat--center .wrap { max-width: 960px; margin-inline: auto; text-align: center; }
-.beat--center .b-head { font-size: clamp(2.6rem, 7vw, 5.4rem); }
+.beat--center .b-head { font-size: clamp(2.2rem, 5.8vw, 4rem); }
 .beat--center .b-sub { max-width: 48ch; margin-inline: auto; }
 .beat--fullbleed .wrap { position: relative; z-index: 2; }
 /* Game of Life living background (life.js) + a vignette to keep the copy legible. */
@@ -456,6 +467,10 @@ svg.flow { display: block; width: 100%; height: auto; }
   .beat--split .wrap { grid-template-columns: 1fr; }
   /* On mobile the visual leads and the copy follows (reads better stacked). */
   .beat--split .b-aside { order: -1; }
+  /* Beats 1 & 2 (split story beats, not the dev mirror): centered copy on mobile. */
+  .beat--split:not(.beat--mirror) .b-copy { text-align: center; }
+  .beat--split:not(.beat--mirror) .b-sub,
+  .beat--split:not(.beat--mirror) .b-note { margin-inline: auto; }
   /* mobile reflow: header -> title -> $0 -> description -> docs -> divider -> code.
      dev-band goes display:contents so its three parts split across the column. */
   .beat--mirror .dev-band { display: contents; }
@@ -478,7 +493,7 @@ svg.flow { display: block; width: 100%; height: auto; }
   .beat--mirror .b-sub,
   .beat--mirror .actions { justify-self: center; }
   /* big two-line title (the <br class="brk"> forces the break) */
-  .beat--mirror .b-head { font-size: clamp(2.3rem, 5.8vw, 4.8rem); }
+  .beat--mirror .b-head { font-size: clamp(1.95rem, 4.8vw, 4rem); }
   .beat--mirror .brk { display: inline; }
   /* divider back to a thin horizontal rule; code spans the column */
   .beat--mirror .aside-divider {
@@ -553,7 +568,14 @@ html.js .reveal.in { opacity: 1; transform: none; will-change: auto; }
   /* Tighter vertical breathing on mobile so each beat fits one screen (keeps the
      mandatory snap from trapping a too-tall section on short phones). */
   .beat { padding-block: clamp(2.5rem, 6vh, 4.5rem); }
-  .hero-bg { left: 0; top: 50%; bottom: auto; transform: translate(-45%, -50%); opacity: 0.35; }   /* vertically centred, 45% off the left */
+  .hero-bg { left: 0; top: 50%; bottom: auto; transform: translate(-38%, -50%); height: min(78vh, 780px); opacity: 0.35; }   /* vertically centred, pulled a bit more into view for mobile */
+  /* Header reads as glass from the top on mobile (no transparent-over-hero state). */
+  .site-header {
+    background: rgba(13,13,13,0.82);
+    backdrop-filter: saturate(160%) blur(18px);
+    -webkit-backdrop-filter: saturate(160%) blur(18px);
+    border-bottom-color: var(--line-soft);
+  }
   /* Native page-at-a-time on touch: halt at every section even on a fast fling,
      and stay in step with the URL bar. Replaces the JS touch pager that fought
      native momentum (the "scrolls past everything" jank). */
