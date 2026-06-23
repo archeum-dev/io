@@ -346,7 +346,13 @@ body.identity-mode .switch-label { color: var(--gold); }
 /* split: copy one side, an accent / breathing room the other */
 .beat--split .wrap { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem, 5vw, 5rem); align-items: center; }
 .beat--split .b-copy { text-align: left; }
-.beat--split .b-head { font-size: clamp(1.85rem, 4.25vw, 2.2rem); }
+.beat--split .b-head { font-size: clamp(1.85rem, 4.25vw, 2.2rem); }   /* fallback when container units are unsupported */
+/* Beats 1 & 2 only: a wider stage on desktop with the two columns shrinking
+   together (1fr 1fr), and the headline sized to its own column via cqi, so the
+   font scales with the column width and the line never wraps. */
+.beat--split:not(.beat--mirror) .wrap { max-width: 1440px; }
+.beat--split:not(.beat--mirror) .b-copy { container-type: inline-size; }
+.beat--split:not(.beat--mirror) .b-head { font-size: clamp(1.5rem, 6.5cqi, 2.7rem); }
 .beat--split .b-aside { display: grid; place-items: center; gap: 0.7rem; }
 .beat--split .actions { margin-top: 1.6rem; }
 /* Dev beat (desktop): a centered vertical flow - header, large title, then a
@@ -471,6 +477,8 @@ svg.flow { display: block; width: 100%; height: auto; }
   .beat--split:not(.beat--mirror) .b-copy { text-align: center; }
   .beat--split:not(.beat--mirror) .b-sub,
   .beat--split:not(.beat--mirror) .b-note { margin-inline: auto; }
+  /* Single column on mobile: size the headline to the viewport, not the column. */
+  .beat--split:not(.beat--mirror) .b-head { font-size: clamp(1.85rem, 6vw, 2.2rem); }
   /* mobile reflow: header -> title -> $0 -> description -> docs -> divider -> code.
      dev-band goes display:contents so its three parts split across the column. */
   .beat--mirror .dev-band { display: contents; }
