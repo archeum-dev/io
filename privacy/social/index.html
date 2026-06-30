@@ -33,10 +33,11 @@
   <main class="doc" id="main">
     <a class="back" href="/">← Back to archeum.io</a>
     <h1>Privacy Policy - Social</h1>
-    <p class="updated">Last updated: June 15, 2026</p>
+    <p class="updated">Last updated: June 29, 2026</p>
 
     <h2>Overview</h2>
     <p>Social is a decentralized social app built on the Archeum network. It connects to the node you own - running on your phone, through the Archeum app - to read and write your social data. Archeum the publisher does not operate servers that receive or store your data.</p>
+    <p>Your Social data lives on the node you own. Each app on the Archeum network is responsible for its own data practices, and Archeum the publisher never receives or accesses data stored on your node.</p>
 
     <h2>Data stored on your device</h2>
     <ul>
@@ -59,7 +60,8 @@
     <p>Archeum handles are pseudonymous - they are not tied to your real name unless you choose to share it.</p>
 
     <h2>Data we (the publisher) receive</h2>
-    <p>By default, <strong>nothing</strong>. No analytics, no telemetry, no crash reporting, no ad tracking.</p>
+    <p><strong>Crash reports.</strong> When the app hits a fatal error, it automatically sends a crash report to the Archeum developer node (<code>@archeum</code>) so we can find and fix bugs. A report contains the error and stack trace, the app version, your device model and OS version, and a random per-install identifier, and it is associated with your pseudonymous Archeum handle. It does <strong>not</strong> include your posts, messages, photos, keys, or IP address. Reports are captured with the Sentry SDK but routed over the Archeum network to our node - they are <strong>not</strong> sent to Sentry's servers, and we use no third-party analytics or crash-reporting service.</p>
+    <p>Beyond crash reports, we receive no analytics, no telemetry, and no ad tracking.</p>
     <p>If you tap <em>Settings → Send Feedback</em>, the app opens the system share sheet (or email app) with recent debug logs (up to ~50&nbsp;KB, normally kept only in memory; briefly written to a temp file for the share-sheet attachment, cleaned up by the OS) addressed to <code>contact@archeum.io</code>. Nothing is sent unless you choose to send it.</p>
 
     <h2>User-generated content &amp; moderation</h2>

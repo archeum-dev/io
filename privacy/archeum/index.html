@@ -33,7 +33,7 @@
   <main class="doc" id="main">
     <a class="back" href="/">← Back to archeum.io</a>
     <h1>Privacy Policy - Archeum</h1>
-    <p class="updated">Last updated: June 15, 2026</p>
+    <p class="updated">Last updated: June 29, 2026</p>
 
     <h2>Overview</h2>
     <p>Archeum is a decentralized personal-infrastructure app - the wallet and key-management app for the Archeum network. The app stores cryptographic keys and identity data on your device and runs your node (the infrastructure that stores your data) <strong>on your own phone</strong>. Archeum the publisher does not operate servers that receive or store your data.</p>
@@ -43,6 +43,7 @@
     <ul>
       <li>Your wallet private key (Ed25519) and recovery phrase</li>
       <li>Your AGE encryption keypair</li>
+      <li>Your login passphrase, if you set one to sign in on another device</li>
       <li>Your Archeum handle(s) and node identity</li>
       <li>App settings and preferences</li>
     </ul>
@@ -50,6 +51,7 @@
 
     <h2>Your node runs on your phone</h2>
     <p>Your Archeum node runs as a background (foreground) service on your phone, anchored to the device's secure hardware (StrongBox). The node stores your data locally and answers app requests on your behalf. There is no third-party server, VPS, or cloud account holding your data - the device in your pocket is the node.</p>
+    <p>Other apps on the Archeum network store their data on your node too, each in its own isolated namespace. Those apps are each responsible for their own data practices, and Archeum the publisher never receives or accesses any data stored on your node.</p>
 
     <h2>Data sent over the network</h2>
     <ul>
@@ -58,7 +60,8 @@
     </ul>
 
     <h2>Data we (the publisher) receive</h2>
-    <p>By default, we receive <strong>nothing</strong>. No analytics, no telemetry, no crash reporting, no ad tracking.</p>
+    <p><strong>Crash reports.</strong> When the app hits a fatal error, it automatically sends a crash report to the Archeum developer node (<code>@archeum</code>) so we can find and fix bugs. A report contains the error and stack trace, your app version, your device model and OS version, and a random per-install identifier, and it is associated with your pseudonymous Archeum handle. It does <strong>not</strong> include your real name, your messages, your files, your keys, or your IP address. Reports are captured with the Sentry SDK but routed over the Archeum network to our node - they are <strong>not</strong> sent to Sentry's servers, and we use no third-party analytics or crash-reporting service.</p>
+    <p>Beyond crash reports, we receive no analytics, no telemetry, and no ad tracking.</p>
     <p>If you tap <em>Settings → Send Feedback</em>, the app opens the system share sheet (or email app) with recent debug logs (up to ~50&nbsp;KB, normally kept only in memory; briefly written to a temp file for the share-sheet attachment, cleaned up by the OS) addressed to <code>contact@archeum.io</code>. Nothing is sent unless you choose to send it.</p>
 
     <h2>Permissions</h2>
@@ -77,11 +80,11 @@
     <ul>
       <li><strong>Google Play Services</strong> - for app distribution and (where used) hardware key attestation.</li>
     </ul>
-    <p>Archeum does not use any blockchain, RPC provider, transaction bundler, or analytics vendor.</p>
+    <p>Archeum does not use any blockchain, RPC provider, or transaction bundler, and sends no data to any third-party analytics or crash-reporting service. Crash reports are captured locally with the Sentry SDK and routed to our own Archeum node, as described above.</p>
 
     <h2>Data deletion</h2>
-    <p>You can delete your account at any time: Settings → Delete Account. This wipes all data stored on your node (across every app namespace) and erases all local data (wallet keys, recovery phrase, secure storage). See <a href="/delete-account/">archeum.io/delete-account</a> for the full process.</p>
-    <p>Handle ownership lives in the mesh consensus, not on a blockchain. After deletion your node goes offline and your data is wiped; with nothing answering and no renewal, the handle lapses after its lease of silence (roughly two months) and the name becomes available again.</p>
+    <p>You can delete your account at any time: Settings → Delete Account. This releases every handle your wallet owns back to the network, wipes all data stored on your node (across every app namespace), and erases all local data (wallet keys, recovery phrase, login passphrase, secure storage). See <a href="/delete-account/">archeum.io/delete-account</a> for the full process.</p>
+    <p>Handle ownership lives in the mesh consensus, not on a blockchain. The deletion flow actively releases your handle the moment you confirm, returning it to the unowned pool so it becomes available for someone else to claim right away.</p>
 
     <h2>Children</h2>
     <p>Archeum is not intended for users under 18.</p>

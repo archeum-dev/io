@@ -33,7 +33,7 @@
   <main class="doc" id="main">
     <a class="back" href="/">← Back to archeum.io</a>
     <h1>Deleting Your Archeum Account</h1>
-    <p class="updated">Last updated: June 15, 2026</p>
+    <p class="updated">Last updated: June 29, 2026</p>
 
     <h2>How Archeum differs from typical apps</h2>
     <p>Archeum is a decentralized personal-infrastructure layer. The Archeum app is where you create your wallet, claim a handle, and manage the node that stores your data - a node that runs on your own phone. <strong>The app publisher does not operate any servers that store your data.</strong> There is no central database of user accounts for us to delete from.</p>
@@ -48,11 +48,12 @@
     <p>Because no publisher-side record exists, deletion is something you perform yourself - directly in the app.</p>
 
     <h3>1. Use the in-app Delete Account flow (recommended)</h3>
-    <p>Open the Archeum app → Settings → <strong>Delete Account</strong>. You'll be asked to type "delete" as confirmation. Once confirmed, the app will:</p>
+    <p>Open the Archeum app → Settings → <strong>Delete Account</strong>. You'll be asked to type "delete" and confirm with your device biometric or screen lock. Once confirmed, the app will, in order:</p>
     <ol>
-      <li>Wipe all data stored on your node, across every app's namespace.</li>
-      <li>Clear all local secure storage (wallet keys, recovery phrase, app settings).</li>
-      <li>Sign you out.</li>
+      <li><strong>Release every handle your wallet owns</strong> back to the network - the name immediately stops being yours and becomes available for anyone to claim.</li>
+      <li><strong>Leave the consensus network</strong> and publish a tombstone, so you stop being reachable and your node's committee seat is vacated cleanly.</li>
+      <li><strong>Erase all data stored on your node</strong>, across every app's namespace.</li>
+      <li><strong>Remove your wallet keys, recovery phrase, and login passphrase</strong> from this device, and sign you out.</li>
     </ol>
     <p>After deletion completes, you're returned to the welcome screen. Uninstall the app to remove any remaining cache files.</p>
 
@@ -60,12 +61,14 @@
     <p>If you prefer to selectively remove data before deleting your account, tap your identity card → <strong>Storage</strong> → <strong>Apps</strong> tab. For each app, tap <strong>Clear data</strong> to delete its stored content from your node. See <a href="/delete-data/">Deleting App Data</a> for details.</p>
 
     <h3>3. What happens to your handle</h3>
-    <p>Your handle is owned in the mesh consensus, not on a blockchain. After deletion your node goes offline and your data is wiped. With nothing answering on your behalf and no renewal, your handle lapses after its lease of silence (roughly two months) and the name becomes available for someone else to claim. No one can interact with you through it in the meantime.</p>
+    <p>Your handle is owned in the mesh consensus, not on a blockchain. The deletion flow <strong>actively releases it</strong> the moment you confirm: it is signed back to the network's unowned pool and becomes available for someone else to claim right away. (This is cleaner than simply going silent - a handle that is merely abandoned, never released, would only lapse on its own after roughly two months of no renewal.)</p>
 
     <h2>What data is deleted vs. retained</h2>
     <ul>
-      <li><strong>Deleted by the in-app flow</strong>: all data stored on your node (every namespace) + all on-device data (wallet keys, recovery phrase, app settings, secure storage). This happens in a single operation when you confirm deletion.</li>
+      <li><strong>Released to the network</strong>: every handle your wallet owns, returned to the unowned pool and claimable by anyone.</li>
+      <li><strong>Deleted from your device</strong>: all data stored on your node (every namespace) + all on-device data (wallet keys, recovery phrase, login passphrase, app settings, secure storage). This happens in a single operation when you confirm deletion.</li>
       <li><strong>Deleted on uninstall</strong>: any remaining app cache files not covered by the deletion flow.</li>
+      <li><strong>Kept in public consensus</strong>: after release, the mesh holds no data that identifies you. If you held the Arc currency, that balance remains in the public ledger keyed to your wallet's public key - a decentralized ledger entry cannot be erased, but it contains no private data and is unspendable once your keys are removed from the device.</li>
       <li><strong>Retained by the publisher</strong>: nothing - see below.</li>
     </ul>
 
