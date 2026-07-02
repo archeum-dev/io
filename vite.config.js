@@ -15,6 +15,7 @@ export default defineConfig({
         privacySocial: page('./privacy/social/index.html'),
         deleteAccount: page('./delete-account/index.html'),
         deleteData: page('./delete-data/index.html'),
+        childSafety: page('./child-safety/index.html'),
         aiHelp: page('./ai-help/index.html'),
       },
     },
