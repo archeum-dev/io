@@ -70,7 +70,7 @@ async function buildCard() {
   ctx.fillRect(0, 0, W, H)
 
   // Warm glow centered on the content's optical middle (depth without breaking the black).
-  const glow = ctx.createRadialGradient(cx, 290, 0, cx, 290, 600)
+  const glow = ctx.createRadialGradient(cx, 330, 0, cx, 330, 600)
   glow.addColorStop(0, 'rgba(212,175,55,0.12)')
   glow.addColorStop(1, 'rgba(212,175,55,0)')
   ctx.fillStyle = glow
@@ -85,56 +85,47 @@ async function buildCard() {
   ctx.fillStyle = vein
   ctx.fillRect(0, 0, W, 3)
 
-  // Lockup - seal and wordmark side by side, matched in visual height (the
-  // wordmark's cap height equals the seal height), centered as one unit. The
-  // seal is trimmed first so the *visible* mark sets the height. If the pair
-  // would crowd the edges, the whole lockup scales down together.
+  // Brand badge - seal and wordmark side by side at the top, matched in visual
+  // height (the wordmark's cap height equals the seal height), centered as one
+  // unit. Small on purpose: the headline is the hero, this is the sender.
   const seal = await loadImage(await sharp(SEAL).trim().png().toBuffer())
   ctx.textAlign = 'left'
   ctx.textBaseline = 'alphabetic'
   ctx.font = `100px "${SEMIBOLD}"`
   const capRatio = ctx.measureText('ARCHEUM').actualBoundingBoxAscent / 100
-  let sealH = 138
-  let wordPx = sealH / capRatio
-  let track = wordPx * 0.06
-  const wordWidth = () => {
-    ctx.font = `${Math.round(wordPx)}px "${SEMIBOLD}"`
-    ctx.letterSpacing = `${track}px`
-    const w = ctx.measureText('ARCHEUM').width - track // drop trailing spacing
-    ctx.letterSpacing = '0px'
-    return w
-  }
-  let sealW = (seal.width / seal.height) * sealH
-  let gap = sealH * 0.30
-  let textW = wordWidth()
-  const fit = 1060 / (sealW + gap + textW)
-  if (fit < 1) {
-    sealH *= fit; sealW *= fit; gap *= fit; wordPx *= fit; track *= fit
-    textW = wordWidth()
-  }
-  const lockCy = 170 // vertical middle of the lockup band
+  const sealH = 44
+  const wordPx = Math.round(sealH / capRatio)
+  const track = Math.round(wordPx * 0.14)
+  const sealW = (seal.width / seal.height) * sealH
+  const gap = Math.round(sealH * 0.40)
+  ctx.font = `${wordPx}px "${SEMIBOLD}"`
+  ctx.letterSpacing = `${track}px`
+  const textW = ctx.measureText('ARCHEUM').width - track // drop trailing spacing
+  ctx.letterSpacing = '0px'
+  const lockCy = 110 // vertical middle of the badge
   const lx = cx - (sealW + gap + textW) / 2
   ctx.drawImage(seal, Math.round(lx), Math.round(lockCy - sealH / 2), Math.round(sealW), Math.round(sealH))
   const wordBase = Math.round(lockCy + (wordPx * capRatio) / 2)
-  ctx.fillStyle = goldFill(ctx, wordBase, Math.round(wordPx))
+  ctx.fillStyle = goldFill(ctx, wordBase, wordPx)
   ctx.letterSpacing = `${track}px`
   ctx.fillText('ARCHEUM', Math.round(lx + sealW + gap), wordBase)
   ctx.letterSpacing = '0px'
 
   ctx.textAlign = 'center'
 
-  // Headline (the catchphrase) - auto-fit so a longer line never crowds the edges.
+  // Headline (the catchphrase) - the hero of the card; auto-fit so a longer
+  // line never crowds the edges.
   const HEAD = "Your pocket server."
-  let hs = 80
+  let hs = 100
   ctx.font = `${hs}px "${SEMIBOLD}"`
   while (ctx.measureText(HEAD).width > 1060 && hs > 44) { hs -= 2; ctx.font = `${hs}px "${SEMIBOLD}"` }
   ctx.fillStyle = '#f5f5f7'
-  ctx.fillText(HEAD, cx, 392)
+  ctx.fillText(HEAD, cx, 360)
 
   // Subhead - the paired subtext, dim.
-  ctx.font = `31px "${REGULAR}"`
+  ctx.font = `33px "${REGULAR}"`
   ctx.fillStyle = '#a1a1a6'
-  ctx.fillText('Claim your part of the internet.', cx, 452)
+  ctx.fillText('Claim your part of the internet.', cx, 432)
 
   // Domain tag at the foot, quiet gold.
   ctx.font = `25px "${SEMIBOLD}"`
