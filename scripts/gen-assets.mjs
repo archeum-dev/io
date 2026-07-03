@@ -87,11 +87,11 @@ async function buildCard() {
 
   // Brand seal alone at the top - no wordmark; the name shows up in the text
   // that surrounds a shared card (og:title, site name), so the card doesn't
-  // repeat it. Small on purpose: the headline is the hero, this is the sender.
+  // repeat it. Full-size mark, but the headline stays the hero.
   const seal = await loadImage(await sharp(SEAL).trim().png().toBuffer())
-  const sealH = 44
+  const sealH = 138
   const sealW = (seal.width / seal.height) * sealH
-  ctx.drawImage(seal, Math.round(cx - sealW / 2), Math.round(110 - sealH / 2), Math.round(sealW), Math.round(sealH))
+  ctx.drawImage(seal, Math.round(cx - sealW / 2), Math.round(160 - sealH / 2), Math.round(sealW), Math.round(sealH))
 
   ctx.textAlign = 'center'
   ctx.textBaseline = 'alphabetic'
