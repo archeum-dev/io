@@ -85,19 +85,20 @@ async function buildCard() {
   ctx.fillStyle = vein
   ctx.fillRect(0, 0, W, 3)
 
-  // Brand badge - seal and wordmark side by side at the top, matched in visual
-  // height (the wordmark's cap height equals the seal height), centered as one
-  // unit. Small on purpose: the headline is the hero, this is the sender.
+  // Brand badge - seal and wordmark side by side at the top, both centered on
+  // the badge line, the seal a step taller than the wordmark's cap height.
+  // Small on purpose: the headline is the hero, this is the sender.
   const seal = await loadImage(await sharp(SEAL).trim().png().toBuffer())
   ctx.textAlign = 'left'
   ctx.textBaseline = 'alphabetic'
   ctx.font = `100px "${SEMIBOLD}"`
   const capRatio = ctx.measureText('ARCHEUM').actualBoundingBoxAscent / 100
-  const sealH = 44
-  const wordPx = Math.round(sealH / capRatio)
+  const sealH = 64
+  const wordCap = 44 // wordmark cap height - deliberately smaller than the seal
+  const wordPx = Math.round(wordCap / capRatio)
   const track = Math.round(wordPx * 0.14)
   const sealW = (seal.width / seal.height) * sealH
-  const gap = Math.round(sealH * 0.40)
+  const gap = Math.round(wordCap * 0.40)
   ctx.font = `${wordPx}px "${SEMIBOLD}"`
   ctx.letterSpacing = `${track}px`
   const textW = ctx.measureText('ARCHEUM').width - track // drop trailing spacing
