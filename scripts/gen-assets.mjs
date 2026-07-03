@@ -89,7 +89,7 @@ async function buildCard() {
   // that surrounds a shared card (og:title, site name), so the card doesn't
   // repeat it. Full-size mark, but the headline stays the hero.
   const seal = await loadImage(await sharp(SEAL).trim().png().toBuffer())
-  const sealH = 138
+  const sealH = 150
   const sealW = (seal.width / seal.height) * sealH
   ctx.drawImage(seal, Math.round(cx - sealW / 2), Math.round(160 - sealH / 2), Math.round(sealW), Math.round(sealH))
 
@@ -103,12 +103,12 @@ async function buildCard() {
   ctx.font = `${hs}px "${SEMIBOLD}"`
   while (ctx.measureText(HEAD).width > 1060 && hs > 44) { hs -= 2; ctx.font = `${hs}px "${SEMIBOLD}"` }
   ctx.fillStyle = '#f5f5f7'
-  ctx.fillText(HEAD, cx, 360)
+  ctx.fillText(HEAD, cx, 388)
 
   // Subhead - the paired subtext, dim.
   ctx.font = `38px "${REGULAR}"`
   ctx.fillStyle = '#a1a1a6'
-  ctx.fillText('Claim your part of the internet.', cx, 432)
+  ctx.fillText('Claim your part of the internet.', cx, 460)
 
   // Domain tag at the foot, quiet gold.
   ctx.font = `29px "${SEMIBOLD}"`
