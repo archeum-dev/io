@@ -85,34 +85,16 @@ async function buildCard() {
   ctx.fillStyle = vein
   ctx.fillRect(0, 0, W, 3)
 
-  // Brand badge - seal and wordmark side by side at the top, both centered on
-  // the badge line, the seal a step taller than the wordmark's cap height.
-  // Small on purpose: the headline is the hero, this is the sender.
+  // Brand seal alone at the top - no wordmark; the name shows up in the text
+  // that surrounds a shared card (og:title, site name), so the card doesn't
+  // repeat it. Small on purpose: the headline is the hero, this is the sender.
   const seal = await loadImage(await sharp(SEAL).trim().png().toBuffer())
-  ctx.textAlign = 'left'
-  ctx.textBaseline = 'alphabetic'
-  ctx.font = `100px "${SEMIBOLD}"`
-  const capRatio = ctx.measureText('ARCHEUM').actualBoundingBoxAscent / 100
-  const sealH = 64
-  const wordCap = 44 // wordmark cap height - deliberately smaller than the seal
-  const wordPx = Math.round(wordCap / capRatio)
-  const track = Math.round(wordPx * 0.14)
+  const sealH = 44
   const sealW = (seal.width / seal.height) * sealH
-  const gap = Math.round(wordCap * 0.40)
-  ctx.font = `${wordPx}px "${SEMIBOLD}"`
-  ctx.letterSpacing = `${track}px`
-  const textW = ctx.measureText('ARCHEUM').width - track // drop trailing spacing
-  ctx.letterSpacing = '0px'
-  const lockCy = 110 // vertical middle of the badge
-  const lx = cx - (sealW + gap + textW) / 2
-  ctx.drawImage(seal, Math.round(lx), Math.round(lockCy - sealH / 2), Math.round(sealW), Math.round(sealH))
-  const wordBase = Math.round(lockCy + (wordPx * capRatio) / 2)
-  ctx.fillStyle = goldFill(ctx, wordBase, wordPx)
-  ctx.letterSpacing = `${track}px`
-  ctx.fillText('ARCHEUM', Math.round(lx + sealW + gap), wordBase)
-  ctx.letterSpacing = '0px'
+  ctx.drawImage(seal, Math.round(cx - sealW / 2), Math.round(110 - sealH / 2), Math.round(sealW), Math.round(sealH))
 
   ctx.textAlign = 'center'
+  ctx.textBaseline = 'alphabetic'
 
   // Headline (the catchphrase) - the hero of the card; auto-fit so a longer
   // line never crowds the edges.
