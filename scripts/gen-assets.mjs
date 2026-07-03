@@ -106,13 +106,13 @@ async function buildCard() {
   ctx.fillText(HEAD, cx, 360)
 
   // Subhead - the paired subtext, dim.
-  ctx.font = `33px "${REGULAR}"`
+  ctx.font = `38px "${REGULAR}"`
   ctx.fillStyle = '#a1a1a6'
   ctx.fillText('Claim your part of the internet.', cx, 432)
 
   // Domain tag at the foot, quiet gold.
-  ctx.font = `25px "${SEMIBOLD}"`
-  ctx.fillStyle = goldFill(ctx, 566, 25)
+  ctx.font = `29px "${SEMIBOLD}"`
+  ctx.fillStyle = goldFill(ctx, 566, 29)
   drawTracked(ctx, 'archeum.io', cx, 566, 1)
 
   const out = resolve(root, 'public/brand/banners/og-card.png')
