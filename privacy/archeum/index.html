@@ -56,20 +56,17 @@
     <h2>Data sent over the network</h2>
     <ul>
       <li><strong>The Archeum mesh</strong>: handle ownership lives in Archeum's own feeless, peer-to-peer consensus (there is no blockchain). To claim or resolve handles, your node exchanges signed messages with other nodes over the mesh. As with any peer-to-peer network, peers you connect to can see your IP address. There are no fees, no gas, and no third-party RPC provider.</li>
-      <li><strong>Your node</strong>: apps connect to the node on your phone over QUIC (UDP 443) to read and write your data. That data is under your control.</li>
+      <li><strong>Your node</strong>: apps connect to the node on your phone over QUIC (UDP) to read and write your data. That data is under your control.</li>
     </ul>
 
     <h2>Data we (the publisher) receive</h2>
-    <p><strong>Crash reports.</strong> When the app hits a fatal error, it automatically sends a crash report to the Archeum developer node (<code>@archeum</code>) so we can find and fix bugs. A report contains the error and stack trace, your app version, your device model and OS version, and a random per-install identifier, and it is associated with your pseudonymous Archeum handle. It does <strong>not</strong> include your real name, your messages, your files, your keys, or your IP address. Reports are captured with the Sentry SDK but routed over the Archeum network to our node - they are <strong>not</strong> sent to Sentry's servers, and we use no third-party analytics or crash-reporting service.</p>
+    <p><strong>Crash reports.</strong> When the app hits a fatal error, it automatically sends a crash report to the Archeum developer node (<code>@archeum</code>) so we can find and fix bugs. A report contains the error and stack trace, your app version, your device model and OS version, and a random per-install identifier, and it is associated with your pseudonymous Archeum handle. It does <strong>not</strong> include your real name, your messages, your files, your keys, or your IP address. Reports are captured with the Sentry SDK but routed over the Archeum network to our node - they are <strong>not</strong> sent to Sentry's servers, and we use no third-party analytics or crash-reporting service. Crash reporting is on by default but optional: you can turn it off at any time in <em>Settings → Data &amp; Privacy → Crash Reporting</em>, and when it is off nothing is sent.</p>
     <p>Beyond crash reports, we receive no analytics, no telemetry, and no ad tracking.</p>
-    <p>If you tap <em>Settings → Send Feedback</em>, the app opens the system share sheet (or email app) with recent debug logs (up to ~50&nbsp;KB, normally kept only in memory; briefly written to a temp file for the share-sheet attachment, cleaned up by the OS) addressed to <code>contact@archeum.io</code>. Nothing is sent unless you choose to send it.</p>
-
     <h2>Permissions</h2>
     <ul>
       <li><strong>Internet</strong>: connect to the mesh and serve your node.</li>
       <li><strong>Notifications</strong>: Android requires a visible notification while the node runs as a foreground service.</li>
-      <li><strong>Bluetooth</strong>: provision a nearby Archeum node during first-time setup. Local-only; no data is transmitted over the internet via Bluetooth.</li>
-      <li><strong>Fine Location</strong>: Android requires it to scan for Bluetooth devices during provisioning. We do not read, store, or transmit your location.</li>
+      <li><strong>Camera</strong>: scan a recipient's QR code when sending Arc. Used only while the scanner is open; no images are stored or uploaded.</li>
       <li><strong>Battery optimization exemption</strong> (optional): so the node can stay reachable in the background. You control whether to grant it.</li>
     </ul>
 

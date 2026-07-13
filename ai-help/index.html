@@ -58,9 +58,10 @@
 
     <h2>Reactor types</h2>
     <ul>
-      <li><strong>HandleSet</strong> - a set of identities that reacted. Use for likes, follows, attendees.</li>
-      <li><strong>FirstCall</strong> - identity → data, first write wins. Use for RSVPs, poll votes.</li>
-      <li><strong>LastCall</strong> - identity → data, last write wins. Use for status, presence, location.</li>
+      <li><strong>Vote</strong> - a set of identities that reacted. Use for likes, follows, attendees.</li>
+      <li><strong>Constant</strong> - identity → data, first write wins. Use for RSVPs, poll votes.</li>
+      <li><strong>Update</strong> - identity → data, last write wins. Use for status, presence, location.</li>
+      <li><strong>Inbox</strong> - append-only, sender-verified entries any caller can push. Use for notifications and messages.</li>
     </ul>
     <p>Reactors are the only cross-identity write path. They run as sandboxed WASM on the node, can touch many items in a single call, and never see your encryption keys.</p>
 
@@ -72,7 +73,7 @@ await profile.item("bio").put_string("Software engineer", public = true)
 post = profile.item("post-123")
 await post.put_string("My first post!", public = true)
 
-likes = post.reactor("likes", HandleSet)
+likes = post.reactor("likes", Vote)
 await likes.start()
 await likes.react()        // any signed-in user can like
 

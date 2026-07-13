@@ -68,7 +68,8 @@
       <li><strong>Released to the network</strong>: every handle your wallet owns, returned to the unowned pool and claimable by anyone.</li>
       <li><strong>Deleted from your device</strong>: all data stored on your node (every namespace) + all on-device data (wallet keys, recovery phrase, login passphrase, app settings, secure storage). This happens in a single operation when you confirm deletion.</li>
       <li><strong>Deleted on uninstall</strong>: any remaining app cache files not covered by the deletion flow.</li>
-      <li><strong>Kept in public consensus</strong>: after release, the mesh holds no data that identifies you. If you held the Arc currency, that balance remains in the public ledger keyed to your wallet's public key - a decentralized ledger entry cannot be erased, but it contains no private data and is unspendable once your keys are removed from the device.</li>
+      <li><strong>Kept in public consensus</strong>: if you held the Arc currency, that balance remains in the public ledger keyed to your wallet's public key - a decentralized ledger entry cannot be erased, but it contains no private data and is unspendable once your keys are removed from the device.</li>
+      <li><strong>Kept on other people's nodes</strong>: your posts live exclusively on your node and are deleted with it. What other nodes hold are pointers telling apps where to find your content - those go dead the moment your node's data is gone. Public information you sent to others (such as reactions, which can carry short ephemeral content) may persist on their nodes until it expires.</li>
       <li><strong>Retained by the publisher</strong>: nothing - see below.</li>
     </ul>
 
