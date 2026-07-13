@@ -1,3 +1,6 @@
+
+<img width="100%" alt="banner" src="https://github.com/user-attachments/assets/018ae80b-f20f-4608-91c9-f0e5c582534b" />
+
 # archeum.io
 
 The marketing site for [Archeum](https://archeum.io) - decentralized personal
