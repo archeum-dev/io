@@ -43,7 +43,7 @@
 
     <h2>How we prevent CSAE</h2>
     <ul>
-      <li><strong>On-device content classification.</strong> An explicit-content classifier runs on the device for every image, both when it is uploaded and when it is displayed. Explicit imagery is blocked at both ends, so it is never stored or shown. Because every app on the network is hardware-attested, this check cannot be removed or bypassed: a modified app that skipped it could not join the network.</li>
+      <li><strong>On-device content classification.</strong> An explicit-content classifier runs on the device for every image, both when it is uploaded and when it is displayed. Explicit imagery is blocked at both ends, so it is never stored or shown. Because our apps are hardware-attested, this check cannot be removed or bypassed: a modified copy that skipped it could not join the network as Archeum or Social.</li>
       <li><strong>Fail-closed.</strong> If the classifier cannot run, the content is withheld rather than shown.</li>
       <li><strong>Adults only.</strong> Our apps target 18+. The age restriction is enforced at the distribution level, not by an in-app gate: the apps carry an adult rating on Google Play, and Play's account controls keep them from being offered to known-minor accounts.</li>
       <li><strong>Launch scope.</strong> At launch, Social supports text and images only; video is not enabled.</li>
