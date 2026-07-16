@@ -33,7 +33,7 @@
   <main class="doc" id="main">
     <a class="back" href="/">← Back to archeum.io</a>
     <h1>Privacy Policy - Archeum</h1>
-    <p class="updated">Last updated: June 29, 2026</p>
+    <p class="updated">Last updated: July 15, 2026</p>
 
     <h2>Overview</h2>
     <p>Archeum is a decentralized personal-infrastructure app - the wallet and key-management app for the Archeum network. The app stores cryptographic keys and identity data on your device and runs your node (the infrastructure that stores your data) <strong>on your own phone</strong>. Archeum the publisher does not operate servers that receive or store your data.</p>
@@ -55,7 +55,7 @@
 
     <h2>Data sent over the network</h2>
     <ul>
-      <li><strong>The Archeum mesh</strong>: handle ownership lives in Archeum's own feeless, peer-to-peer consensus (there is no blockchain). To claim or resolve handles, your node exchanges signed messages with other nodes over the mesh. As with any peer-to-peer network, peers you connect to can see your IP address. There are no fees, no gas, and no third-party RPC provider.</li>
+      <li><strong>The Archeum mesh</strong>: handle ownership is settled by the network's own feeless consensus, which the nodes run among themselves. The nodes produce blocks and chain them together, so it is a blockchain in the plain sense. What it holds is small: the current state of who owns what, plus the proofs to verify it. It is not the kind of ever-growing public ledger that keeps a permanent record of every past action. To claim or resolve a handle, your node trades signed messages with other nodes over the mesh, and, as on any peer-to-peer network, the peers you connect to can see your IP address. There are no fees, no gas, no mining, and no outside RPC provider.</li>
       <li><strong>Your node</strong>: apps connect to the node on your phone over QUIC (UDP) to read and write your data. That data is under your control.</li>
     </ul>
 
@@ -66,7 +66,7 @@
     <ul>
       <li><strong>Internet</strong>: connect to the mesh and serve your node.</li>
       <li><strong>Notifications</strong>: Android requires a visible notification while the node runs as a foreground service.</li>
-      <li><strong>Camera</strong>: scan a recipient's QR code when sending Arc. Used only while the scanner is open; no images are stored or uploaded.</li>
+      <li><strong>Camera</strong>: scan a QR code, either a recipient's wallet when you send Arc or a computer's code when you link a desktop to your account. The camera runs only while the scanner is open, and no images are stored or uploaded.</li>
       <li><strong>Battery optimization exemption</strong> (optional): so the node can stay reachable in the background. You control whether to grant it.</li>
     </ul>
 
@@ -77,11 +77,11 @@
     <ul>
       <li><strong>Google Play Services</strong> - for app distribution and (where used) hardware key attestation.</li>
     </ul>
-    <p>Archeum does not use any blockchain, RPC provider, or transaction bundler, and sends no data to any third-party analytics or crash-reporting service. Crash reports are captured locally with the Sentry SDK and routed to our own Archeum node, as described above.</p>
+    <p>Archeum does not run on any outside blockchain such as Ethereum or Base, and it uses no RPC provider, transaction bundler, or gas. Handle ownership is tracked by the network's own consensus, which the nodes run themselves. We send no data to any third-party analytics or crash-reporting service: crash reports are captured locally with the Sentry SDK and routed to our own Archeum node, as described above.</p>
 
     <h2>Data deletion</h2>
     <p>You can delete your account at any time: Settings → Delete Account. This releases every handle your wallet owns back to the network, wipes all data stored on your node (across every app namespace), and erases all local data (wallet keys, recovery phrase, login passphrase, secure storage). See <a href="/delete-account/">archeum.io/delete-account</a> for the full process.</p>
-    <p>Handle ownership lives in the mesh consensus, not on a blockchain. The deletion flow actively releases your handle the moment you confirm, returning it to the unowned pool so it becomes available for someone else to claim right away.</p>
+    <p>Handle ownership lives in the network's consensus, which tracks the current state of who owns what rather than a permanent history. When you confirm deletion, the flow releases your handle right then and returns it to the unowned pool, so someone else can claim it immediately, and no lasting record of your past ownership remains.</p>
 
     <h2>Children</h2>
     <p>Archeum is not intended for users under 18.</p>
