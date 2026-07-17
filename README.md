@@ -51,6 +51,6 @@ New routes are real HTML files; register them in `vite.config.js` under
 `build.rollupOptions.input`.
 
 > **Note:** the legal/support pages describe the current architecture
-> (node-on-phone, feeless mesh consensus, Ed25519, AGE - no blockchain, no
+> (node-on-phone, feeless mesh consensus, Ed25519, AGE - no outside chain, no
 > tenant sharing). Review the copy as publisher before relying on it for
 > compliance.

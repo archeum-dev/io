@@ -38,7 +38,7 @@
     <div class="note">Archeum apps are <strong>mobile-only</strong> (Android for v1). Apps connect to the user's node - which runs on their phone - using their wallet credentials. Only the Archeum app itself provisions nodes; normal apps never do.</div>
 
     <h2>The model in one breath</h2>
-    <p>Every user owns a node on their phone and a handle like <code>@alice</code>. Your app signs in as a user, then reads and writes data on that user's node over QUIC. There is <strong>no backend to run and no blockchain</strong> - handle ownership lives in Archeum's feeless mesh consensus, and the SDK resolves a handle to a node endpoint for you.</p>
+    <p>Every user owns a node on their phone and a handle like <code>@alice</code>. Your app signs in as a user, then reads and writes data on that user's node over QUIC. There is <strong>no backend to run</strong> - handle ownership lives in Archeum's own feeless consensus (no outside chain, no gas), and the SDK resolves a handle to a node endpoint for you.</p>
 
     <h2>Three primitives</h2>
     <ul>
